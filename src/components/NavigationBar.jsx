@@ -12,8 +12,8 @@ const menuItem = [
     { path: profile, text: '내 정보' }
 ];
 
-const NavigationBar = () => {
-    const [menuTab, setMenuTab] = useState(0);
+const NavigationBar = ({ activeTab }) => {
+    const [menuTab, setMenuTab] = useState(activeTab);
 
     const handleMenuClick = (index) => {
         setMenuTab(index);

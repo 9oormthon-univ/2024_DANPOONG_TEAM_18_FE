@@ -17,7 +17,7 @@ const GlobalStyles = createGlobalStyle`
   body {
     max-width: 480px;
     margin: auto;
-    background-color: ${(props) => props.theme.colors.background}; /* theme에서 background 색상 가져오기 */
+    background: linear-gradient(${(props) => props.theme.colors.background}, #FFFFFF);
     height: 100vh;
     overflow: hidden;
   }
