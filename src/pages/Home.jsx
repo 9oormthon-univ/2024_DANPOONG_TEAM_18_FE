@@ -36,7 +36,9 @@ const Home = () => {
           <SecondTitle>카드 뒤집기</SecondTitle>
         </BottomSection>
       </ContentsWrapper>
+      <Footer>
         <NavigationBar activeTab={activeTab} />
+      </Footer>
     </Wrapper>
   )
 }
@@ -44,6 +46,7 @@ const Home = () => {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
 `;
 
 const ContentsWrapper = styled.div`
@@ -90,6 +93,16 @@ const Title = styled.div`
 const SecondTitle = styled.div`
     font-size: 14px;
     margin-bottom: 15px;
+`
+
+const Footer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
 `
 
 export default Home

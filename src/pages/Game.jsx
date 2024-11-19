@@ -28,7 +28,9 @@ const Game = () => {
         </MainContent>
         <Button text={"게임 플레이!"} onClick={() => handleGameOpen()}/>
       </Wrapper>
-      <NavigationBar />
+      <Footer>
+        <NavigationBar />
+      </Footer>
     </>
   )
 }
@@ -63,7 +65,7 @@ const MainContent = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 30px;
+  margin: 50px;
 `
 
 const ScoreContainer = styled.div`
@@ -91,6 +93,16 @@ const DescriptionTitle = styled.div`
 const Description = styled.div`
   font-size: 16px;
   margin-bottom: 20px;
+`
+
+const Footer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
 `
 
 export default Game

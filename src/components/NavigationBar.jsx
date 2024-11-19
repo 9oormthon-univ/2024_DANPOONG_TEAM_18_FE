@@ -44,6 +44,7 @@ const Wrapper = styled.div`
   justify-content: center;
   gap: 80px;
   width: 100%;
+  max-width: 480px;
   height: 70px;
   background-color: #fff;
   box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
