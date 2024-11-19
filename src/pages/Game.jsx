@@ -1,8 +1,14 @@
 import styled from "styled-components"
 import Button from "../components/Button"
 import NavigationBar from "../components/NavigationBar"
+import { useNavigate } from "react-router-dom"
 
 const Game = () => {
+  const nav = useNavigate();
+
+  const handleGameOpen = () => {
+    nav('/game/number-game');
+  }
 
   return (
     <>
@@ -20,7 +26,7 @@ const Game = () => {
           <DescriptionTitle>게임 설명</DescriptionTitle>
           <Description>1부터 16까지 순서대로 누르는 게임입니다 😊</Description>
         </MainContent>
-        <Button text={"게임 플레이!"} />
+        <Button text={"게임 플레이!"} onClick={() => handleGameOpen()}/>
       </Wrapper>
       <NavigationBar />
     </>
