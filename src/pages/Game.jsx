@@ -2,9 +2,12 @@ import styled from "styled-components"
 import Button from "../components/Button"
 import NavigationBar from "../components/NavigationBar"
 import { useNavigate } from "react-router-dom"
+import { useContext } from "react"
+import { ScoreContext } from "../App";
 
 const Game = () => {
   const nav = useNavigate();
+  const { bestScore } = useContext(ScoreContext);
 
   const handleGameOpen = () => {
     nav('/game/number-game');
@@ -19,7 +22,7 @@ const Game = () => {
           <ScoreContainer>
             <Score>
               <span>최고 기록</span>
-              <span>1분 20초</span>
+              <span>{bestScore} 초</span>
             </Score>
           </ScoreContainer>
 

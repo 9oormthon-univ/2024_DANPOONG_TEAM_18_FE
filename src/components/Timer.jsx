@@ -1,16 +1,19 @@
-import { useState, useEffect } from "react";
+import { useEffect, useContext } from "react";
 import styled from "styled-components";
+import { ScoreContext } from "../App";
 
-const Timer = () => {
-    const [seconds, setSeconds] = useState(0);
+const Timer = ({ isRunning }) => {
+    const { seconds, setSeconds } = useContext(ScoreContext);
 
     useEffect(() => {
+        if(!isRunning) return;
+
         const interval = setInterval(() => {
             setSeconds((prev) => prev+1);
         }, 1000);
 
         return () => clearInterval(interval);
-    }, []);
+    }, [isRunning]);
 
     const formatTime = (totalSeconds) => {
         const hours = Math.floor(totalSeconds / 3600);
