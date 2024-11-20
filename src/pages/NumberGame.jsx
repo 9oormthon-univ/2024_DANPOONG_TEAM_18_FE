@@ -14,7 +14,7 @@ const shuffleArray = (array) => {
 
 const NumberGame = () => {
     const nav = useNavigate();
-    const { bestScore, setGameScore, seconds, setSeconds } = useContext(ScoreContext);
+    const { bestScore, setGameScore, seconds } = useContext(ScoreContext);
     const [shuffledNumbers, setShuffledNumbers] = useState([]);
     const [clickedNumbers, setClickedNumbers] = useState([]);
     const [isRunning, setIsRunning] = useState(true);
@@ -32,7 +32,6 @@ const NumberGame = () => {
           alert('축하합니다! 모든 숫자를 순서대로 클릭했습니다!');
           setClickedNumbers([]);
           setIsRunning(false);
-          setSeconds(0);
           
           if(bestScore.numberGame === '-' || bestScore.numberGame > seconds ){
             setGameScore("numberGame", seconds);
@@ -42,7 +41,6 @@ const NumberGame = () => {
         alert('실패!');
         setClickedNumbers([]);
         setIsRunning(false);
-        setSeconds(0);
       }
     }
 

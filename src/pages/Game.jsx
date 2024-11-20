@@ -7,10 +7,11 @@ import { ScoreContext } from "../App";
 
 const Game = () => {
   const nav = useNavigate();
-  const { bestScore } = useContext(ScoreContext);
+  const { bestScore, setSeconds } = useContext(ScoreContext);
 
   const handleGameOpen = () => {
     nav('/game/number-game');
+    setSeconds(0);
   }
 
   return (
