@@ -5,6 +5,7 @@ import { useState, useEffect, useContext } from "react";
 import Timer from "../components/Timer";
 import Button from "../components/Button"
 import { ScoreContext } from "../App"
+import Retry from "./Retry";
 
 const Number = [1,2,3,4,5,6,7,8,9,10,11,12];
 
@@ -14,10 +15,11 @@ const shuffleArray = (array) => {
 
 const NumberGame = () => {
     const nav = useNavigate();
-    const { bestScore, setGameScore, seconds } = useContext(ScoreContext);
+    const { bestScore, setGameScore, seconds, setSeconds } = useContext(ScoreContext);
     const [shuffledNumbers, setShuffledNumbers] = useState([]);
     const [clickedNumbers, setClickedNumbers] = useState([]);
     const [isRunning, setIsRunning] = useState(true);
+    const [isOverlayOpen, setIsOverlayOpen] = useState(false);
 
     useEffect(() => {
       setShuffledNumbers(shuffleArray([...Number]));
@@ -38,29 +40,45 @@ const NumberGame = () => {
           }
         }
       } else {
-        alert('실패!');
         setClickedNumbers([]);
         setIsRunning(false);
+        setIsOverlayOpen(true);
       }
     }
 
+    const handleRetry = () => {
+      setClickedNumbers([]);
+      setShuffledNumbers(shuffleArray([...Number]));
+      setIsRunning(true);
+      setIsOverlayOpen(false);
+      setSeconds(0);
+    }
+
   return (
-    <Wrapper>
-      <Title>숫자 순서 게임</Title>
-      <Timer isRunning={isRunning} />
-      <NumberGrid>
-        {shuffledNumbers.map((num) => (
-          <NumberItem 
-            key={num}
-            onClick={() => handleNumberClick(num)}
-            isClicked={clickedNumbers.includes(num)}
-          >
-            {num}
-          </NumberItem>
-        ))}
-      </NumberGrid>
-      <Button text={"나가기"} onClick={() => nav(-1)}/>
-    </Wrapper>
+    <>
+      <Wrapper>
+        <Title>숫자 순서 게임</Title>
+        <Timer isRunning={isRunning} />
+        <NumberGrid>
+          {shuffledNumbers.map((num) => (
+            <NumberItem 
+              key={num}
+              onClick={() => handleNumberClick(num)}
+              isClicked={clickedNumbers.includes(num)}
+            >
+              {num}
+            </NumberItem>
+          ))}
+        </NumberGrid>
+        <Button text={"나가기"} onClick={() => nav(-1)}/>
+      </Wrapper>
+
+      {
+        isOverlayOpen && (
+          <Retry handleRetry={handleRetry} />
+        )
+      }
+    </>
   );
 };
 
