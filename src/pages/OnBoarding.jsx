@@ -1,8 +1,11 @@
 import styled from "styled-components"
 import logo from '../assets/logo.svg'
 import kakaoLogo from '../assets/kakao-logo.svg'
+import { useNavigate } from "react-router-dom"
 
 const OnBoarding = () => {
+    const nav = useNavigate();
+
   return (
     <MainWrapper>
         <SecondTitle>잊고 싶지 않은 순간들을 함께합니다.</SecondTitle>
@@ -11,7 +14,7 @@ const OnBoarding = () => {
             <img src={logo} alt="Logo" width={155} height={400} />
             <LoginButton>
                 <img src={kakaoLogo} alt="kakaoLogo" width={20} height={20} />
-                <span>카카오 로그인</span>
+                <span onClick={() => nav('/welcome')}>카카오 로그인</span>
             </LoginButton>
         </MainContainer>
     </MainWrapper>

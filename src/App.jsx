@@ -4,6 +4,7 @@ import OnBoarding from "./pages/OnBoarding"
 import Game from "./pages/Game"
 import NumberGame from "./pages/NumberGame"
 import { createContext, useState } from "react"
+import Welcome from "./pages/Welcome"
 
 export const ScoreContext = createContext();
 
@@ -28,6 +29,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/on-board" element={<OnBoarding />} />
+          <Route path="/welcome" element={<Welcome />} />
           <Route path="/game" element={<Game />} />
           <Route path="/game/number-game" element={<NumberGame />} />
         </Routes>
