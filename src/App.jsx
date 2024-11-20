@@ -8,12 +8,23 @@ import { createContext, useState } from "react"
 export const ScoreContext = createContext();
 
 function App() {
-  const [bestScore, setBestScore] = useState("- ");
+  const [bestScore, setBestScore] = useState({
+    numberGame: '-',
+    cardGame: '-',
+    TextGame: '-',
+  });
   const [seconds, setSeconds] = useState(0);
+
+  const setGameScore = (gameName, score) => {
+    setBestScore((prevScores) => ({
+      ...prevScores,
+      [gameName]: score,
+    }));
+  }
 
   return (
     <BrowserRouter>
-      <ScoreContext.Provider value={{ bestScore, setBestScore, seconds, setSeconds }}>
+      <ScoreContext.Provider value={{ bestScore, setGameScore, seconds, setSeconds }}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/on-board" element={<OnBoarding />} />

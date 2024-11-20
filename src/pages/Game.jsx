@@ -22,7 +22,7 @@ const Game = () => {
           <ScoreContainer>
             <Score>
               <span>최고 기록</span>
-              <span>{bestScore} 초</span>
+              <span>{bestScore.numberGame} 초</span>
             </Score>
           </ScoreContainer>
 

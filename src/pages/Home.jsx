@@ -2,11 +2,13 @@ import styled from "styled-components"
 import Button from '../components/Button'
 import NavigationBar from '../components/NavigationBar'
 import { useNavigate } from "react-router-dom"
-import { useState } from "react"
+import { useContext, useState } from "react"
+import { ScoreContext } from "../App"
 
 const Home = () => {
   const nav = useNavigate();
   const [activeTab, setActiveTab] = useState(0);
+  const { bestScore } = useContext(ScoreContext);
 
   const handleGameNav = () => {
     nav('/game');
@@ -31,7 +33,7 @@ const Home = () => {
 
         <BottomSection>
           <Title>게임별 최고기록</Title>
-          <SecondTitle>숫자 순서 게임</SecondTitle>
+          <SecondTitle>숫자 순서 게임 {bestScore.numberGame} 초</SecondTitle>
           <SecondTitle>틀린 글자 찾기</SecondTitle>
           <SecondTitle>카드 뒤집기</SecondTitle>
         </BottomSection>
