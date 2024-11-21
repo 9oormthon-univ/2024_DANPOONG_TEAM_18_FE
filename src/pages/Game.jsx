@@ -129,7 +129,7 @@ const DescriptionTitle = styled.div`
 `;
 
 const Description = styled.div`
-  font-size: 16px;
+  font-size: 18px;
   margin-bottom: 20px;
 `;
 
