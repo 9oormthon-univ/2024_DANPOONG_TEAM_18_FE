@@ -9,6 +9,7 @@ import RemindDiary from "./pages/RemindDiary"
 import { createContext, useState } from "react"
 import Welcome from "./pages/Welcome"
 import CardGame from "./pages/CardGame"
+import TextGame from "./pages/TextGame"
 
 export const ScoreContext = createContext();
 
@@ -37,6 +38,7 @@ function App() {
           <Route path="/game" element={<Game />} />
           <Route path="/game/number-game" element={<NumberGame />} />
           <Route path="/game/card-game" element={<CardGame />} />
+          <Route path="/game/text-game" element={<TextGame />} />
           <Route path="/diary" element={<Diary />} />
           <Route path="/diary/write" element={<WriteDiary />} />
           <Route path="/diary/remind" element={<RemindDiary />} />
