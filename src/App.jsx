@@ -5,6 +5,7 @@ import Game from "./pages/Game"
 import NumberGame from "./pages/NumberGame"
 import { createContext, useState } from "react"
 import Welcome from "./pages/Welcome"
+import CardGame from "./pages/CardGame"
 
 export const ScoreContext = createContext();
 
@@ -12,7 +13,7 @@ function App() {
   const [bestScore, setBestScore] = useState({
     numberGame: '-',
     cardGame: '-',
-    TextGame: '-',
+    textGame: '-',
   });
   const [seconds, setSeconds] = useState(0);
 
@@ -32,6 +33,7 @@ function App() {
           <Route path="/welcome" element={<Welcome />} />
           <Route path="/game" element={<Game />} />
           <Route path="/game/number-game" element={<NumberGame />} />
+          <Route path="/game/card-game" element={<CardGame />} />
         </Routes>
       </ScoreContext.Provider>
     </BrowserRouter>

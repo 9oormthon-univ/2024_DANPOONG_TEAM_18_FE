@@ -1,0 +1,185 @@
+import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import { useState, useContext } from "react";
+
+import Timer from "../components/Timer";
+import Button from "../components/Button"
+import { ScoreContext } from "../App"
+import Retry from "./Retry";
+import Card from "../assets/icons/card.svg"
+
+const NumberGame = () => {
+    const nav = useNavigate();
+    const { bestScore, setGameScore, seconds, setSeconds } = useContext(ScoreContext);
+    const [isRunning, setIsRunning] = useState(true);
+    const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+    const [flippedCards, setFlippedCards] = useState([]);
+    const [matchedCards, setMatchedCards] = useState([]);
+
+    const keys = ["a","b","c","d","e"];
+    const [cards, setCards] = useState(() => 
+      [...keys, ...keys]
+        .map((key) => ({key, id: Math.random() }))
+        .sort(() => Math.random() - 0.5)
+    );
+
+    const handleCardClick = (index) => {
+      if(flippedCards.includes(index) || matchedCards.includes(cards[index].key)) {
+        return;
+      }
+
+      if(flippedCards.length === 2) {
+        return;
+      }
+
+      const updatedFlippedCards = [...flippedCards, index];
+      setFlippedCards(updatedFlippedCards);
+
+      // 카드가 2개 선택되었을 때 매칭 확인
+      if(updatedFlippedCards.length === 2) {
+        const [firstIndex, secondIndex] = updatedFlippedCards;
+        const isMatch = cards[firstIndex].key === cards[secondIndex].key;
+
+        setTimeout(() => {
+          if(isMatch) {
+            setMatchedCards((prev) => [...prev, cards[firstIndex].key]);
+          }
+          setFlippedCards([]);
+        }, 1000);
+
+        if (matchedCards.length + 1 === keys.length) {
+          alert('축하합니다! 모든 카드를 맞추셨습니다!');
+          setIsRunning(false);
+          
+          if(bestScore.cardGame === '-' || bestScore.cardGame > seconds ){
+            setGameScore("cardGame", seconds);
+          }
+        }
+      }
+    }
+
+    const handleRetry = () => {
+      setMatchedCards([]);
+      setFlippedCards([]);
+      setIsRunning(true);
+      setIsOverlayOpen(false);
+      setSeconds(0);
+      setCards(
+        [...keys, ...keys]
+          .map((key) => ({ key, id: Math.random() }))
+          .sort(() => Math.random() - 0.5)
+      );
+    };
+
+  return (
+    <>
+      <Wrapper>
+        <Title>숫자 순서 게임</Title>
+        <Timer isRunning={isRunning} />
+
+        <CardGrid>
+      {cards.map((card, index) => (
+        <CardItem key={card.id} onClick={() => handleCardClick(index)}>
+          <CardInner flipped={flippedCards.includes(index) || matchedCards.includes(card.key)}>
+            <CardFront><img src={Card} alt="card" width={100} height={130}/></CardFront> {/* 앞면에 키 표시 */}
+            <CardBack>
+              {card.key}
+              </CardBack>
+          </CardInner>
+        </CardItem>
+      ))}
+    </CardGrid>
+    <Button text={"나가기"} onClick={() => nav(-1)}/>
+      </Wrapper>
+
+      {
+        isOverlayOpen && (
+          <Retry handleRetry={handleRetry} />
+        )
+      }
+    </>
+  );
+};
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  padding: 0 30px;
+
+  Button {
+      margin: 10px 130px;
+      margin-bottom: 40px;
+      width: 146px;
+    }
+`;
+
+const Title = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    font-size: 26px;
+    margin-top: 40px;
+    margin-bottom: 10px;
+`
+
+const CardGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+  margin-top: 5px;
+`;
+
+const CardItem = styled.div`
+  width: 90px;
+  height: 130px;
+  position: relative;
+  perspective: 1000px;
+  overflow: hidden;
+`;
+
+const CardInner = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transform-style: preserve-3d;
+  transform: ${({ flipped }) => (flipped ? "rotateY(180deg)" : "rotateY(0deg)")};
+  transition: transform 0.5s;
+`;
+
+const CardFront = styled.div`
+  backface-visibility: hidden;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+  border-radius: 20px;
+`;
+
+const CardBack = styled.div`
+  backface-visibility: hidden;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: white;
+  transform: rotateY(180deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+  border-radius: 20px;
+`;
+
+export default NumberGame;
