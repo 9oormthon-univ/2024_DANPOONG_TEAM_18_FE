@@ -10,8 +10,8 @@ const Modal = () => {
         <Container>
             <img src={logo} alt='logo' width={70} height={70} />
             <span>기억의 나무에 어서오세요 :)</span>
-            <span>하루 치 미션은</span>
-            <span>게임 1번, 일상 기록 1번 입니다.</span>
+            <span className='highlight'>하루 치 미션은</span>
+            <span className='highlight'>게임 1번, 일상 기록 1번 입니다.</span>
             <ConfirmButton onClick={() => nav('/')}>확인했습니다</ConfirmButton>
         </Container>
     </Wrapper>
@@ -46,8 +46,7 @@ const Container = styled.div`
       margin-bottom: 7px;
     }
 
-    span:nth-child(3),
-    span:nth-child(4) {
+    .highlight {
       font-size: 18px;
       font-weight: 600;
     }
