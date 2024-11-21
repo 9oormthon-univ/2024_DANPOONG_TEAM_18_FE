@@ -16,13 +16,13 @@ const gameDetails = [
     key: "cardGame",
     path: "card-game",
     title: "카드 뒤집기 게임",
-    description: "같은 카드 쌍을 모두 찾아 뒤집으세요 🃏",
+    description: "카드를 뒤집어 같은 그림의 카드를 맞추는 게임입니다 🃏",
   },
   {
     key: "textGame",
     path: "text-game",
     title: "틀린 단어 찾기 게임",
-    description: "틀린 단어를 찾아 클릭하세요 🔍",
+    description: "여러 개의 단어 중 틀린 단어를 골라내는 게임입니다 🔍",
   },
 ];
 
