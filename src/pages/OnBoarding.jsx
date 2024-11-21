@@ -1,10 +1,13 @@
 import styled from "styled-components"
-import logo from '../assets/logo.svg'
-import kakaoLogo from '../assets/kakao-logo.svg'
-import { useNavigate } from "react-router-dom"
+import logo from '../assets/icons/logo.svg'
+import kakaoLogo from '../assets/icons/kakao-logo.svg'
+
+const KAKAO_LOGIN_URL = import.meta.env.VITE_KAKAO_LOGIN_URL;
 
 const OnBoarding = () => {
-    const nav = useNavigate();
+  const handleKakaoLogin = () => {
+    window.location.href = KAKAO_LOGIN_URL; // 카카오 로그인 URL로 이동
+  };
 
   return (
     <MainWrapper>
@@ -12,9 +15,9 @@ const OnBoarding = () => {
         <Title>기억의 나무</Title>
         <MainContainer>
             <img src={logo} alt="Logo" width={155} height={400} />
-            <LoginButton>
+            <LoginButton onClick={handleKakaoLogin}>
                 <img src={kakaoLogo} alt="kakaoLogo" width={20} height={20} />
-                <span onClick={() => nav('/welcome')}>카카오 로그인</span>
+                <span>카카오 로그인</span>
             </LoginButton>
         </MainContainer>
     </MainWrapper>
