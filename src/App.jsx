@@ -3,6 +3,9 @@ import Home from "./pages/Home"
 import OnBoarding from "./pages/OnBoarding"
 import Game from "./pages/Game"
 import NumberGame from "./pages/NumberGame"
+import Diary from "./pages/Diary"
+import WriteDiary from "./pages/WriteDiary"
+import RemindDiary from "./pages/RemindDiary"
 import { createContext, useState } from "react"
 import Welcome from "./pages/Welcome"
 
@@ -32,6 +35,9 @@ function App() {
           <Route path="/welcome" element={<Welcome />} />
           <Route path="/game" element={<Game />} />
           <Route path="/game/number-game" element={<NumberGame />} />
+          <Route path="/diary" element={<Diary />} />
+          <Route path="/diary/write" element={<WriteDiary />} />
+          <Route path="/diary/remind" element={<RemindDiary />} />
         </Routes>
       </ScoreContext.Provider>
     </BrowserRouter>
