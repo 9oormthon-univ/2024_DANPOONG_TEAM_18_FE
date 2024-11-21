@@ -8,6 +8,7 @@ import WriteDiary from "./pages/WriteDiary"
 import RemindDiary from "./pages/RemindDiary"
 import { createContext, useState } from "react"
 import Welcome from "./pages/Welcome"
+import CardGame from "./pages/CardGame"
 
 export const ScoreContext = createContext();
 
@@ -15,7 +16,7 @@ function App() {
   const [bestScore, setBestScore] = useState({
     numberGame: '-',
     cardGame: '-',
-    TextGame: '-',
+    textGame: '-',
   });
   const [seconds, setSeconds] = useState(0);
 
@@ -35,6 +36,7 @@ function App() {
           <Route path="/welcome" element={<Welcome />} />
           <Route path="/game" element={<Game />} />
           <Route path="/game/number-game" element={<NumberGame />} />
+          <Route path="/game/card-game" element={<CardGame />} />
           <Route path="/diary" element={<Diary />} />
           <Route path="/diary/write" element={<WriteDiary />} />
           <Route path="/diary/remind" element={<RemindDiary />} />

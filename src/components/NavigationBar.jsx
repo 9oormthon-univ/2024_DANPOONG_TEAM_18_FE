@@ -1,8 +1,8 @@
 import styled from "styled-components"
-import check from "../assets/check.svg"
-import game from "../assets/game.svg"
-import diary from "../assets/diary.svg"
-import profile from "../assets/profile.svg"
+import check from "../assets/icons/check.svg"
+import game from "../assets/icons/game.svg"
+import diary from "../assets/icons/diary.svg"
+import profile from "../assets/icons/profile.svg"
 import { useState } from "react"
 import { Link } from "react-router-dom"
 

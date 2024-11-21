@@ -2,33 +2,63 @@ import styled from "styled-components";
 import Button from "../components/Button";
 import NavigationBar from "../components/NavigationBar";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { ScoreContext } from "../App";
+
+const gameDetails = [
+  {
+    key: "numberGame",
+    path: "number-game",
+    title: "숫자 순서 게임",
+    description: "1부터 16까지 순서대로 누르는 게임입니다 🤗",
+  },
+  {
+    key: "cardGame",
+    path: "card-game",
+    title: "카드 뒤집기 게임",
+    description: "카드를 뒤집어 같은 그림의 카드를 맞추는 게임입니다 🃏",
+  },
+  {
+    key: "textGame",
+    path: "text-game",
+    title: "틀린 단어 찾기 게임",
+    description: "여러 개의 단어 중 틀린 단어를 골라내는 게임입니다 🔍",
+  },
+];
 
 const Game = () => {
   const nav = useNavigate();
   const { bestScore, setSeconds } = useContext(ScoreContext);
+  const [randomGame, setRandomGame] = useState();
+
+  useEffect(() => {
+    const randomIndex = Math.floor(Math.random() * gameDetails.length);
+    setRandomGame(gameDetails[randomIndex]);
+  },[])
 
   const handleGameOpen = () => {
-    nav("/game/number-game");
+    nav(`/game/${randomGame.path}`);
     setSeconds(0);
-  };
+  }
 
   return (
     <>
       <Wrapper>
         <Title>오늘의 게임</Title>
         <MainContent>
-          <GameTitle>숫자 순서 게임</GameTitle>
-          <ScoreContainer>
+          {randomGame && (
+    <>
+      <GameTitle>{randomGame.title}</GameTitle>
+      <ScoreContainer>
             <Score>
               <span>최고 기록</span>
-              <ScoreStyle>{bestScore.numberGame} 초</ScoreStyle>
+              <ScoreStyle>{bestScore[randomGame.key]} 초</ScoreStyle>
             </Score>
           </ScoreContainer>
-
-          <DescriptionTitle>게임 설명</DescriptionTitle>
-          <Description>1부터 16까지 순서대로 누르는 게임입니다 😊</Description>
+      <DescriptionTitle>게임 설명</DescriptionTitle>
+      <Description>{randomGame.description}</Description>
+    </>
+  )}
         </MainContent>
         <Button text={"게임 플레이!"} onClick={() => handleGameOpen()} />
       </Wrapper>
@@ -100,7 +130,7 @@ const DescriptionTitle = styled.div`
 `;
 
 const Description = styled.div`
-  font-size: 16px;
+  font-size: 18px;
   margin-bottom: 20px;
 `;
 
