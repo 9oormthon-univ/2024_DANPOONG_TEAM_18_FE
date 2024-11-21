@@ -1,41 +1,42 @@
-import styled from "styled-components"
-import check from "../assets/icons/check.svg"
-import game from "../assets/icons/game.svg"
-import diary from "../assets/icons/diary.svg"
-import profile from "../assets/icons/profile.svg"
-import { useState } from "react"
-import { Link } from "react-router-dom"
+import styled from "styled-components";
+import check from "../assets/icons/check.svg";
+import game from "../assets/icons/game.svg";
+import diary from "../assets/icons/diary.svg";
+import profile from "../assets/icons/profile.svg";
+import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 const menuItem = [
-  { path: "/", icon: check, text: '남은 미션' },
-  { path: "/game", icon: game, text: '게임' },
-  { path: "/diary", icon: diary, text: '일상 기록' },
-  { path: "/profile", icon: profile, text: '내 정보' }
+  { path: "/", icon: check, text: "남은 미션" },
+  { path: "/game", icon: game, text: "게임" },
+  { path: "/diary", icon: diary, text: "일상 기록" },
+  { path: "/profile", icon: profile, text: "내 정보" },
 ];
 
 const NavigationBar = ({ activeTab }) => {
-    const [menuTab, setMenuTab] = useState(activeTab);
-
-    const handleMenuClick = (index) => {
-        setMenuTab(index);
-    }
+  const [menuTab, setMenuTab] = useState(activeTab);
 
   return (
     <Wrapper>
-        <Indicator selectedIndex={menuTab} />
-        {
-            menuItem.map((item, index) => (
-              <Link to={item.path} key={index} onClick={() => handleMenuClick(index)}>
-                  <MenuItem>
-                      <img src={item.icon} alt={item.text} width={24} height={24} />
-                      <span>{item.text}</span>
-                  </MenuItem>
-              </Link>
-          ))
-        }
+      <Indicator selectedIndex={menuTab} />
+      {menuItem.map((item, index) => (
+        <NavLink
+          to={item.path}
+          key={index}
+          className={({ isActive }) => {
+            if (isActive) setMenuTab(index);
+            return isActive ? "active" : "";
+          }}
+        >
+          <MenuItem>
+            <img src={item.icon} alt={item.text} width={24} height={24} />
+            <span>{item.text}</span>
+          </MenuItem>
+        </NavLink>
+      ))}
     </Wrapper>
-  )
-}
+  );
+};
 
 const Wrapper = styled.div`
   position: relative;
@@ -61,7 +62,9 @@ const MenuItem = styled.div`
   align-items: center;
   text-align: center;
   cursor: pointer;
-  transition: transform 0.2s, color 0.3s;
+  transition:
+    transform 0.2s,
+    color 0.3s;
 
   img {
     margin-bottom: 5px;
@@ -69,7 +72,7 @@ const MenuItem = styled.div`
 
   span {
     font-size: 12px;
-    color: ${(props) => (props.isActive ? props.theme.colors.main : '#333')};
+    color: ${(props) => (props.isActive ? props.theme.colors.main : "#333")};
   }
 
   &:hover {
@@ -88,7 +91,9 @@ const Indicator = styled.div`
   height: 3px;
   background-color: ${(props) => props.theme.colors.main};
   border-radius: 2px;
-  transition: left 0.3s ease, width 0.3s ease;
+  transition:
+    left 0.3s ease,
+    width 0.3s ease;
   transform: translateX(-50%);
 `;
 
