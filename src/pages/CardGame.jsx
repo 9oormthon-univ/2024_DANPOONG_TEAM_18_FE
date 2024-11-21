@@ -16,7 +16,7 @@ const NumberGame = () => {
     const [flippedCards, setFlippedCards] = useState([]);
     const [matchedCards, setMatchedCards] = useState([]);
 
-    const keys = ["a","b","c","d","e"];
+    const keys = ["a","b","c","d","e","f"];
     const [cards, setCards] = useState(() => 
       [...keys, ...keys]
         .map((key) => ({key, id: Math.random() }))
