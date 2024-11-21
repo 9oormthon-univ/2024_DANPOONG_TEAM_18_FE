@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import TreeIcon1 from "../assets/tree-icon-1.svg";
-import TreeIcon2 from "../assets/tree-icon-2.svg"
+import TreeIcon1 from "../assets/icons/tree-icon-1.svg";
+import TreeIcon2 from "../assets/icons/tree-icon-2.svg"
 import { useEffect, useState } from "react";
 import Modal from "../components/Modal";
 
