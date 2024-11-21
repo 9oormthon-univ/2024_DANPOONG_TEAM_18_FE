@@ -7,23 +7,24 @@ import { ScoreContext } from "../App";
 
 const gameDetails = [
   {
-    key: "number-game",
+    key: "numberGame",
+    path: "number-game",
     title: "숫자 순서 게임",
     description: "1부터 16까지 순서대로 누르는 게임입니다 🤗",
   },
   {
-    key: "card-game",
+    key: "cardGame",
+    path: "card-game",
     title: "카드 뒤집기 게임",
     description: "같은 카드 쌍을 모두 찾아 뒤집으세요 🃏",
   },
   {
-    key: "text-game",
+    key: "textGame",
+    path: "text-game",
     title: "틀린 단어 찾기 게임",
     description: "틀린 단어를 찾아 클릭하세요 🔍",
   },
 ];
-
-
 
 const Game = () => {
   const nav = useNavigate();
@@ -36,7 +37,7 @@ const Game = () => {
   },[])
 
   const handleGameOpen = () => {
-    nav(`/game/${randomGame.key}`);
+    nav(`/game/${randomGame.path}`);
     setSeconds(0);
   }
 
