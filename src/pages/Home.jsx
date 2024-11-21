@@ -37,8 +37,14 @@ const Home = () => {
             숫자 순서 게임 
             <ScoreContent>{bestScore.numberGame} 초</ScoreContent>
           </SecondTitle>
-          <SecondTitle>틀린 글자 찾기</SecondTitle>
-          <SecondTitle>카드 뒤집기</SecondTitle>
+          <SecondTitle>
+            틀린 글자 찾기
+            <ScoreContent>{bestScore.textGame} 초</ScoreContent>
+          </SecondTitle>
+          <SecondTitle>
+            카드 뒤집기
+            <ScoreContent>{bestScore.cardGame} 초</ScoreContent>
+          </SecondTitle>
         </BottomSection>
       </ContentsWrapper>
       <Footer>
