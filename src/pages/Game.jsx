@@ -27,8 +27,19 @@ const Game = () => {
 
   const handleGameOpen = () => {
     if (randomGame) {
-      nav(`/game/${randomGame.gameType}`);
-      setSeconds(0);
+      const gameTypeToPath = {
+        "숫자 순서 게임": "number-game",
+        "카드 뒤집기 게임": "card-game",
+        "틀린 단어 찾기 게임": "text-game",
+      };
+  
+      const path = gameTypeToPath[randomGame.gameType];
+      if (path) {
+        nav(`/game/${path}`);
+        setSeconds(0);
+      } else {
+        console.error("Unknown game type:", randomGame.gameType);
+      }
     }
   };
 
