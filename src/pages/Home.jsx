@@ -8,7 +8,7 @@ import { ScoreContext } from "../App"
 const Home = () => {
   const nav = useNavigate();
   const [activeTab, setActiveTab] = useState(0);
-  const { bestScore } = useContext(ScoreContext);
+  const { level, bestScore } = useContext(ScoreContext);
 
   const handleGameNav = () => {
     nav('/game');
@@ -25,7 +25,6 @@ const Home = () => {
       <ContentsWrapper>
         <TopSection>
           <Title>남은 미션</Title>
-          <SecondTitle>오늘 진행 한 미션 수 </SecondTitle>
           <ButtonContainer>
             <Button text={"게임하러 가기"} onClick={() => handleGameNav()}/>
             <Button text={"일기 쓰기"} onClick={() => handleDiaryNav()}/>
@@ -34,7 +33,10 @@ const Home = () => {
 
         <MiddleSection>
           <Title>통계</Title>
-          <SecondTitle>현재 기억의 나무 레벨 </SecondTitle>
+          <SecondTitle>
+            현재 기억의 나무 레벨
+            <ScoreContent>{level} Level</ScoreContent>
+          </SecondTitle>
         </MiddleSection>
 
         <BottomSection>
@@ -105,7 +107,7 @@ const BottomSection = styled.div`
 const Title = styled.div`
     font-weight: 600;
     font-size: 26px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 `
 
 const SecondTitle = styled.div`

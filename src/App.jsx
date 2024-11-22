@@ -14,6 +14,7 @@ import TextGame from "./pages/TextGame"
 export const ScoreContext = createContext();
 
 function App() {
+  const [level, setLevel] = useState(1);
   const [bestScore, setBestScore] = useState({
     numberGame: '-',
     cardGame: '-',
@@ -30,7 +31,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <ScoreContext.Provider value={{ bestScore, setGameScore, seconds, setSeconds }}>
+      <ScoreContext.Provider value={{ level, setLevel, bestScore, setGameScore, seconds, setSeconds }}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
