@@ -29,7 +29,7 @@ const gameDetails = [
 
 const Game = () => {
   const nav = useNavigate();
-  const { bestScore, setSeconds } = useContext(ScoreContext);
+  const { statistics, setSeconds } = useContext(ScoreContext);
   const [randomGame, setRandomGame] = useState();
 
   useEffect(() => {
@@ -42,6 +42,10 @@ const Game = () => {
     setSeconds(0);
   }
 
+  const highScore =
+    randomGame &&
+    statistics.find((stat) => stat.gameType === randomGame.title)?.highScore;
+
   return (
     <>
       <Wrapper>
@@ -53,7 +57,11 @@ const Game = () => {
       <ScoreContainer>
             <Score>
               <span>최고 기록</span>
-              <ScoreStyle>{getFormatTime(Number(bestScore[randomGame.key]))}</ScoreStyle>
+              <ScoreStyle>
+                    {highScore !== 0
+                      ? getFormatTime(highScore)
+                      : "기록 없음"}
+                  </ScoreStyle>
             </Score>
           </ScoreContainer>
       <DescriptionTitle>게임 설명</DescriptionTitle>

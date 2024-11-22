@@ -9,7 +9,7 @@ import getFormatTime from "../utils/getFormatTime"
 const Home = () => {
   const nav = useNavigate();
   const [activeTab, setActiveTab] = useState(0);
-  const { level, bestScore } = useContext(ScoreContext);
+  const { level, statistics } = useContext(ScoreContext);
 
   const handleGameNav = () => {
     nav('/game');
@@ -41,19 +41,13 @@ const Home = () => {
         </MiddleSection>
 
         <BottomSection>
-          <Title>게임별 최고기록</Title>
-          <SecondTitle>
-            숫자 순서 게임 
-            <ScoreContent>{getFormatTime(bestScore.numberGame)}</ScoreContent>
-          </SecondTitle>
-          <SecondTitle>
-            틀린 글자 찾기
-            <ScoreContent>{getFormatTime(bestScore.textGame)}</ScoreContent>
-          </SecondTitle>
-          <SecondTitle>
-            카드 뒤집기
-            <ScoreContent>{getFormatTime(bestScore.cardGame)}</ScoreContent>
-          </SecondTitle>
+        <Title>게임별 최고기록</Title>
+          {statistics.map((stat, index) => (
+            <SecondTitle key={index}>
+              {stat.gameType}
+              <ScoreContent>{getFormatTime(stat.highScore)}</ScoreContent>
+            </SecondTitle>
+          ))}
         </BottomSection>
       </ContentsWrapper>
       <Footer>
