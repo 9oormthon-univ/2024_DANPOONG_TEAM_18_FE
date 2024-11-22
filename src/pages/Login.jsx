@@ -4,7 +4,7 @@ import kakaoLogo from '../assets/icons/kakao-logo.svg'
 
 const KAKAO_LOGIN_URL = import.meta.env.VITE_KAKAO_LOGIN_URL;
 
-const OnBoarding = () => {
+const Login = () => {
   const handleKakaoLogin = () => {
     window.location.href = KAKAO_LOGIN_URL; // 카카오 로그인 URL로 이동
   };
@@ -73,4 +73,4 @@ const LoginButton = styled.button`
     }
 `
 
-export default OnBoarding
+export default Login
