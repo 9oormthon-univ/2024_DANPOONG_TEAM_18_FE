@@ -15,10 +15,16 @@ const ButtonStyle = styled.button`
     font-weight: bold;
     padding: 10px 25px;
     box-shadow: 0px 1px 3px 2px rgba(0,0,0,0.1);
+    cursor: pointer;
 
     &:hover {
         background-color: ${(props) => props.theme.colors.main};
         color: #FFFFFF;
+    }
+
+    &:active {
+      transform: scale()(0.8);
+      box-shadow: 0px 1px 2px 1px rgba(0,0,0,0.4);
     }
 `
 
