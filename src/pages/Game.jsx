@@ -5,46 +5,32 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import { ScoreContext } from "../App";
 import getFormatTime from "../utils/getFormatTime";
-
-const gameDetails = [
-  {
-    key: "numberGame",
-    path: "number-game",
-    title: "숫자 순서 게임",
-    description: "1부터 16까지 순서대로 누르는 게임입니다 🤗",
-  },
-  {
-    key: "cardGame",
-    path: "card-game",
-    title: "카드 뒤집기 게임",
-    description: "카드를 뒤집어 같은 그림의 카드를 맞추는 \n 게임입니다 🃏",
-  },
-  {
-    key: "textGame",
-    path: "text-game",
-    title: "틀린 단어 찾기 게임",
-    description: "여러 개의 단어 중 틀린 단어를 골라내는 \n 게임입니다 🔍",
-  },
-];
+import axios from "axios";
 
 const Game = () => {
   const nav = useNavigate();
-  const { statistics, setSeconds } = useContext(ScoreContext);
+  const { setSeconds } = useContext(ScoreContext);
   const [randomGame, setRandomGame] = useState();
 
   useEffect(() => {
-    const randomIndex = Math.floor(Math.random() * gameDetails.length);
-    setRandomGame(gameDetails[randomIndex]);
-  },[])
+    const fetchRandomGame = async () => {
+      try {
+        const response = await axios.get("/api/vi/game");
+        setRandomGame(response.data);
+      } catch (error) {
+        console.error("Failed to fetch random game:", error);
+      }
+    };
+
+    fetchRandomGame();
+  }, []);
 
   const handleGameOpen = () => {
-    nav(`/game/${randomGame.path}`);
-    setSeconds(0);
-  }
-
-  const highScore =
-    randomGame &&
-    statistics.find((stat) => stat.gameType === randomGame.title)?.highScore;
+    if (randomGame) {
+      nav(`/game/${randomGame.gameType}`);
+      setSeconds(0);
+    }
+  };
 
   return (
     <>
@@ -52,22 +38,29 @@ const Game = () => {
         <Title>오늘의 게임</Title>
         <MainContent>
           {randomGame && (
-    <>
-      <GameTitle>{randomGame.title}</GameTitle>
-      <ScoreContainer>
-            <Score>
-              <span>최고 기록</span>
-              <ScoreStyle>
-                    {highScore !== 0
-                      ? getFormatTime(highScore)
+            <>
+              <GameTitle>{randomGame.gameType}</GameTitle>
+              <ScoreContainer>
+                <Score>
+                  <span>최고 기록</span>
+                  <ScoreStyle>
+                    {randomGame.highscore !== 0
+                      ? getFormatTime(randomGame.highscore)
                       : "기록 없음"}
                   </ScoreStyle>
-            </Score>
-          </ScoreContainer>
-      <DescriptionTitle>게임 설명</DescriptionTitle>
-      <Description>{randomGame.description}</Description>
-    </>
-  )}
+                </Score>
+              </ScoreContainer>
+              <DescriptionTitle>게임 설명</DescriptionTitle>
+              <Description>
+                {randomGame.gameType === "숫자 순서 게임" &&
+                  "1부터 16까지 순서대로 누르는 게임입니다 🤗"}
+                {randomGame.gameType === "카드 뒤집기 게임" &&
+                  "카드를 뒤집어 같은 그림의 카드를 맞추는 \n 게임입니다 🃏"}
+                {randomGame.gameType === "틀린 단어 찾기 게임" &&
+                  "여러 개의 단어 중 틀린 단어를 골라내는 \n 게임입니다 🔍"}
+              </Description>
+            </>
+          )}
         </MainContent>
         <Button text={"게임 플레이!"} onClick={() => handleGameOpen()} />
       </Wrapper>
