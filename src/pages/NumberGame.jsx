@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
+import axios from "axios";
 
 import Timer from "../components/Timer";
 import Button from "../components/Button"
@@ -15,11 +16,13 @@ const shuffleArray = (array) => {
 
 const NumberGame = () => {
     const nav = useNavigate();
-    const { bestScore, setGameScore, seconds, setSeconds } = useContext(ScoreContext);
+    const { seconds, setSeconds } = useContext(ScoreContext);
     const [shuffledNumbers, setShuffledNumbers] = useState([]);
     const [clickedNumbers, setClickedNumbers] = useState([]);
     const [isRunning, setIsRunning] = useState(true);
     const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+
+    const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
     useEffect(() => {
       setShuffledNumbers(shuffleArray([...Number]));
@@ -35,10 +38,23 @@ const NumberGame = () => {
           setClickedNumbers([]);
           setIsRunning(false);
           
-          if(bestScore.numberGame === '-' || bestScore.numberGame > seconds ){
-            setGameScore("numberGame", seconds);
+          // if(bestScore.numberGame === '-' || bestScore.numberGame > seconds ){
+          //   setGameScore("numberGame", seconds);
+          // }
+
+          const payload = {
+            result: seconds, 
+            gameType: "숫자 순서 게임"
+          };
+
+          axios.patch(`${apiBaseUrl}/api/vi/game/play`, payload)
+            .then((response) => {
+              console.log('Success:', response.data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
           }
-        }
       } else {
         setClickedNumbers([]);
         setIsRunning(false);

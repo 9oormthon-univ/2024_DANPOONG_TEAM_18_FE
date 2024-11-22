@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
+import axios from "axios";
 
 import Timer from "../components/Timer";
 import Button from "../components/Button"
@@ -18,7 +19,7 @@ const keys = [flower1, flower2, flower3, flower4, flower5, flower6];
 
 const NumberGame = () => {
     const nav = useNavigate();
-    const { bestScore, setGameScore, seconds, setSeconds } = useContext(ScoreContext);
+    const { seconds, setSeconds } = useContext(ScoreContext);
     const [isRunning, setIsRunning] = useState(true);
     const [isOverlayOpen, setIsOverlayOpen] = useState(false);
     const [flippedCards, setFlippedCards] = useState([]);
@@ -28,6 +29,8 @@ const NumberGame = () => {
         .map((key) => ({key, id: Math.random() }))
         .sort(() => Math.random() - 0.5)
     );
+
+    const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
     const handleCardClick = (index) => {
       if(flippedCards.includes(index) || matchedCards.includes(cards[index].key)) {
@@ -57,9 +60,18 @@ const NumberGame = () => {
           alert('축하합니다! 모든 카드를 맞추셨습니다!');
           setIsRunning(false);
           
-          if(bestScore.cardGame === '-' || bestScore.cardGame > seconds ){
-            setGameScore("cardGame", seconds);
-          }
+          const payload = {
+            result: seconds, 
+            gameType: "카드 뒤집기 게임"
+          };
+
+          axios.patch(`${apiBaseUrl}/api/vi/game/play`, payload)
+            .then((response) => {
+              console.log('Success:', response.data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
         }
       }
     }
