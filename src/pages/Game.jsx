@@ -4,6 +4,7 @@ import NavigationBar from "../components/NavigationBar";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import { ScoreContext } from "../App";
+import getFormatTime from "../utils/getFormatTime";
 
 const gameDetails = [
   {
@@ -52,7 +53,7 @@ const Game = () => {
       <ScoreContainer>
             <Score>
               <span>최고 기록</span>
-              <ScoreStyle>{bestScore[randomGame.key]} 초</ScoreStyle>
+              <ScoreStyle>{getFormatTime(Number(bestScore[randomGame.key]))}</ScoreStyle>
             </Score>
           </ScoreContainer>
       <DescriptionTitle>게임 설명</DescriptionTitle>

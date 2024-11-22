@@ -4,6 +4,7 @@ import NavigationBar from '../components/NavigationBar'
 import { useNavigate } from "react-router-dom"
 import { useContext, useState } from "react"
 import { ScoreContext } from "../App"
+import getFormatTime from "../utils/getFormatTime"
 
 const Home = () => {
   const nav = useNavigate();
@@ -43,15 +44,15 @@ const Home = () => {
           <Title>게임별 최고기록</Title>
           <SecondTitle>
             숫자 순서 게임 
-            <ScoreContent>{bestScore.numberGame} 초</ScoreContent>
+            <ScoreContent>{getFormatTime(bestScore.numberGame)}</ScoreContent>
           </SecondTitle>
           <SecondTitle>
             틀린 글자 찾기
-            <ScoreContent>{bestScore.textGame} 초</ScoreContent>
+            <ScoreContent>{getFormatTime(bestScore.textGame)}</ScoreContent>
           </SecondTitle>
           <SecondTitle>
             카드 뒤집기
-            <ScoreContent>{bestScore.cardGame} 초</ScoreContent>
+            <ScoreContent>{getFormatTime(bestScore.cardGame)}</ScoreContent>
           </SecondTitle>
         </BottomSection>
       </ContentsWrapper>
