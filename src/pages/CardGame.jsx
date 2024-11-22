@@ -7,6 +7,14 @@ import Button from "../components/Button"
 import { ScoreContext } from "../App"
 import Retry from "./Retry";
 import Card from "../assets/icons/card.svg"
+import flower1 from '../assets/images/flower-1.png'
+import flower2 from '../assets/images/flower-2.png'
+import flower3 from '../assets/images/flower-3.png'
+import flower4 from '../assets/images/flower-4.png'
+import flower5 from '../assets/images/flower-5.png'
+import flower6 from '../assets/images/flower-6.png'
+
+const keys = [flower1, flower2, flower3, flower4, flower5, flower6];
 
 const NumberGame = () => {
     const nav = useNavigate();
@@ -15,8 +23,6 @@ const NumberGame = () => {
     const [isOverlayOpen, setIsOverlayOpen] = useState(false);
     const [flippedCards, setFlippedCards] = useState([]);
     const [matchedCards, setMatchedCards] = useState([]);
-
-    const keys = ["a","b","c","d","e","f"];
     const [cards, setCards] = useState(() => 
       [...keys, ...keys]
         .map((key) => ({key, id: Math.random() }))
@@ -74,7 +80,7 @@ const NumberGame = () => {
   return (
     <>
       <Wrapper>
-        <Title>숫자 순서 게임</Title>
+        <Title>카드 뒤집기</Title>
         <Timer isRunning={isRunning} />
 
         <CardGrid>
@@ -83,8 +89,11 @@ const NumberGame = () => {
           <CardInner flipped={flippedCards.includes(index) || matchedCards.includes(card.key)}>
             <CardFront><img src={Card} alt="card" width={100} height={130}/></CardFront> {/* 앞면에 키 표시 */}
             <CardBack>
-              {card.key}
-              </CardBack>
+              <img
+                src={card.key}
+                alt="flower"
+              />
+            </CardBack>
           </CardInner>
         </CardItem>
       ))}
@@ -142,6 +151,7 @@ const CardItem = styled.div`
   position: relative;
   perspective: 1000px;
   overflow: hidden;
+  border-radius: 20px;
 `;
 
 const CardInner = styled.div`
@@ -164,7 +174,6 @@ const CardFront = styled.div`
   justify-content: center;
   font-size: 24px;
   font-weight: bold;
-  border-radius: 20px;
 `;
 
 const CardBack = styled.div`
@@ -179,7 +188,6 @@ const CardBack = styled.div`
   justify-content: center;
   font-size: 24px;
   font-weight: bold;
-  border-radius: 20px;
 `;
 
 export default NumberGame;
