@@ -15,11 +15,11 @@ const OnBoarding = () => {
         <Title>기억의 나무</Title>
         <MainContainer>
             <img src={logo} alt="Logo" width={155} height={400} />
-            <LoginButton onClick={handleKakaoLogin}>
+        </MainContainer>
+        <LoginButton onClick={handleKakaoLogin}>
                 <img src={kakaoLogo} alt="kakaoLogo" width={20} height={20} />
                 <span>카카오 로그인</span>
-            </LoginButton>
-        </MainContainer>
+        </LoginButton>
     </MainWrapper>
   )
 }
@@ -27,7 +27,8 @@ const OnBoarding = () => {
 const MainWrapper = styled.div`
     display: flex;
     flex-direction: column;
-    padding: 140px 30px;
+    height: 100vh;
+    padding: 120px 40px;
 `
 
 const MainContainer = styled.div`
@@ -46,7 +47,7 @@ const Title = styled.div`
 const SecondTitle = styled.div`
     color: ${(props) => props.theme.colors.main};
     font-size: 14px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 `
 
 const LoginButton = styled.button`
@@ -60,11 +61,11 @@ const LoginButton = styled.button`
     width: 100%;    
     height: 55px;
     font-size: 15px;
-    margin-top: 20px;
+    margin-top: 40px;
     cursor: pointer;
 
     img {
-        margin-right: 20px;
+        margin-right: 10px;
     }
 
     span {
