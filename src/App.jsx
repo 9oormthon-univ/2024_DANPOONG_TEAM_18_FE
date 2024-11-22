@@ -11,6 +11,8 @@ import RemindDiary from "./pages/RemindDiary";
 import Welcome from "./pages/Welcome";
 import CardGame from "./pages/CardGame";
 import TextGame from "./pages/TextGame";
+import Profile from "./pages/Profile";
+import Mart from "./pages/Mart";
 import logo from "./assets/icons/logo.svg";
 
 export const ScoreContext = createContext();
@@ -49,6 +51,8 @@ function AppContent() {
         <Route path="/diary" element={<Diary />} />
         <Route path="/diary/write" element={<WriteDiary />} />
         <Route path="/diary/remind" element={<RemindDiary />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile/mart" element={<Mart />} />
       </Routes>
     </ScoreContext.Provider>
   );
