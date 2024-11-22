@@ -12,10 +12,12 @@ const Game = () => {
   const { setSeconds } = useContext(ScoreContext);
   const [randomGame, setRandomGame] = useState();
 
+  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+
   useEffect(() => {
     const fetchRandomGame = async () => {
       try {
-        const response = await axios.get("/api/vi/game");
+        const response = await axios.get(`${apiBaseUrl}/api/vi/game`);
         setRandomGame(response.data);
       } catch (error) {
         console.error("Failed to fetch random game:", error);
