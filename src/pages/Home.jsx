@@ -9,7 +9,7 @@ import getFormatTime from "../utils/getFormatTime"
 const Home = () => {
   const nav = useNavigate();
   const [activeTab, setActiveTab] = useState(0);
-  const { level, statistics } = useContext(ScoreContext);
+  const { gamePlayed, diaryWrote, level, statistics } = useContext(ScoreContext);
 
   const handleGameNav = () => {
     nav('/game');
@@ -27,8 +27,8 @@ const Home = () => {
         <TopSection>
           <Title>남은 미션</Title>
           <ButtonContainer>
-            <Button text={"게임하러 가기"} onClick={() => handleGameNav()}/>
-            <Button text={"일기 쓰기"} onClick={() => handleDiaryNav()}/>
+            <Button text={gamePlayed ? "게임 완료" : "게임하러 가기"} onClick={!gamePlayed ? () => handleGameNav() : null}/>
+            <Button text={diaryWrote ? "일기 완료" : "일기 쓰기"} onClick={!diaryWrote ? () => handleDiaryNav() : null}/>
           </ButtonContainer>
         </TopSection>
 
