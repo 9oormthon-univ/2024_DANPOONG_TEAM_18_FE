@@ -15,6 +15,11 @@ const Home = () => {
     setActiveTab(1);
   }
 
+  const handleDiaryNav = () => {
+    nav('/diary');
+    setActiveTab(2);
+  }
+
   return (
     <Wrapper>
       <ContentsWrapper>
@@ -23,6 +28,7 @@ const Home = () => {
           <SecondTitle>오늘 진행 한 미션 수 </SecondTitle>
           <ButtonContainer>
             <Button text={"게임하러 가기"} onClick={() => handleGameNav()}/>
+            <Button text={"일기 쓰기"} onClick={() => handleDiaryNav()}/>
           </ButtonContainer>
         </TopSection>
 
@@ -63,7 +69,7 @@ const Wrapper = styled.div`
 const ContentsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 55px 30px;
+  padding: 55px 40px;
   width: 100%;
   gap: 80px;
 `;
@@ -73,6 +79,7 @@ const ButtonContainer = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 40px;
+  gap: 30px;
 `
 
 const TopSection = styled.div`
