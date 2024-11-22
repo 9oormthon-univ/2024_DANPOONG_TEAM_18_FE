@@ -6,7 +6,8 @@ const KAKAO_LOGIN_URL = import.meta.env.VITE_KAKAO_LOGIN_URL;
 
 const Login = () => {
   const handleKakaoLogin = () => {
-    window.location.href = KAKAO_LOGIN_URL; // 카카오 로그인 URL로 이동
+    const redirectUri = `${window.location.origin}/welcome`;
+    window.location.href = `${KAKAO_LOGIN_URL}?redirect_uri=${redirectUri}`;
   };
 
   return (
