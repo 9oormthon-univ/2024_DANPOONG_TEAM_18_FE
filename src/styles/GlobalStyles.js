@@ -20,6 +20,17 @@ const GlobalStyles = createGlobalStyle`
     background: linear-gradient(${(props) => props.theme.colors.background}, #FFFFFF);
     height: 100vh;
     overflow: hidden;
+    position: relative;
+  }
+
+  .logo {
+    position: absolute;
+    top: 48%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150px;
+    height: 150px;
+    opacity: 0.2;
   }
 `;
 
