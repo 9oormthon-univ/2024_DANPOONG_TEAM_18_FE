@@ -43,9 +43,9 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 80px;
+  gap: 50px;
   width: 100%;
-  max-width: 480px;
+  width: 360px;
   height: 70px;
   background-color: #fff;
   box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);

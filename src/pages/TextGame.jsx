@@ -7,6 +7,7 @@ import Timer from "../components/Timer";
 import Button from "../components/Button";
 import { ScoreContext } from "../App";
 import Retry from "./Retry";
+import GameComplete from "./GameComplete";
 
 const correctWord = [
     "사과", "바나나", "딸기", "수박", "키위", "오렌지", "레몬", "체리", "토마토", "빵",
@@ -24,12 +25,13 @@ const wrongWord = [
 
 const TextGame = () => {
     const nav = useNavigate();
-    const { seconds, setSeconds } = useContext(ScoreContext);
+    const { seconds, setSeconds, id } = useContext(ScoreContext);
 
     const [todayWordIndex, setTodayWordIndex] = useState(null);
     const [todayWrongWordPosition, setTodayWrongWordPosition] = useState(null);
     const [isRunning, setIsRunning] = useState(true);
     const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+    const [isCompleteOpen, setIsCompleteOpen] = useState(false);
 
     const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
@@ -44,15 +46,17 @@ const TextGame = () => {
 
     const wrongWordClick = (index) => {
         if (index === todayWrongWordPosition) {
-            alert("축하합니다! 틀린 단어를 찾았습니다!");
+            setIsCompleteOpen(true);
             setIsRunning(false);
 
             const payload = {
-                result: seconds, 
-                gameType: "틀린 글자 찾기 게임"
+                score: seconds, 
+                gameType: "틀린 단어 찾기 게임"
               };
     
-              axios.patch(`${apiBaseUrl}/api/vi/game/play`, payload)
+              axios.patch(`${apiBaseUrl}/api/vi/game/play`, payload, {
+                params: { id },
+              })
                 .then((response) => {
                   console.log('Success:', response.data);
                 })
@@ -99,7 +103,7 @@ const TextGame = () => {
                 </WordGrid>
                 <Button text={"나가기"} onClick={() => nav(-1)} />
             </Wrapper>
-
+            {isCompleteOpen && <GameComplete />}
             {isOverlayOpen && <Retry handleRetry={handleRetry} />}
         </>
     );
@@ -151,6 +155,7 @@ const WordItem = styled.div`
   font-size: 25px; /* 텍스트 크기 (옵션) */
   font-weight: bold; /* 텍스트 강조 (옵션) */
   cursor: pointer;
+  z-index: 10;
 `;
 
 export default TextGame;

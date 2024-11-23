@@ -2,17 +2,16 @@ import styled from "styled-components";
 import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
 
-const Retry = ({ handleRetry }) => {
+const GameComplete = () => {
   const nav = useNavigate(-1);
 
   return (
     <Overlay>
       <OverlayContent>
-        <Content>아쉬워요 정답이 아니네요 😢</Content>
-        <BoldContent>다시 도전해보시겠어요?</BoldContent>
+        <Content>축하합니다 🥳</Content>
+        <BoldContent>정답을 맞추셨습니다!</BoldContent>
         <ButtonContainer>
-          <Button text={"다시 도전"} onClick={() => handleRetry()} />
-          <Button text={"나가기"} onClick={() => nav(-1)} />
+          <Button text={"확인"} onClick={() => nav('/')} />
         </ButtonContainer>
       </OverlayContent>
     </Overlay>
@@ -52,14 +51,14 @@ const BoldContent = styled.div`
 
 const ButtonContainer = styled.div`
   display: flex;
-  gap: 40px;
+  gap: 50px;
   margin-top: 60px;
 
   Button {
-    margin: 10px 0;
+    margin: 10px 130px;
       margin-bottom: 40px;
-      width: 90px;
+      width: 80px;
   }
 `;
 
-export default Retry;
+export default GameComplete;

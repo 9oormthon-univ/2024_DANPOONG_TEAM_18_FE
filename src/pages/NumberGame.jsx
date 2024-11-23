@@ -7,6 +7,7 @@ import Timer from "../components/Timer";
 import Button from "../components/Button"
 import { ScoreContext } from "../App"
 import Retry from "./Retry";
+import GameComplete from "./GameComplete";
 
 const Number = [1,2,3,4,5,6,7,8,9,10,11,12];
 
@@ -16,11 +17,12 @@ const shuffleArray = (array) => {
 
 const NumberGame = () => {
     const nav = useNavigate();
-    const { seconds, setSeconds } = useContext(ScoreContext);
+    const { seconds, setSeconds, id } = useContext(ScoreContext);
     const [shuffledNumbers, setShuffledNumbers] = useState([]);
     const [clickedNumbers, setClickedNumbers] = useState([]);
     const [isRunning, setIsRunning] = useState(true);
     const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+    const [isCompleteOpen, setIsCompleteOpen] = useState(false);
 
     const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
@@ -34,7 +36,7 @@ const NumberGame = () => {
         setClickedNumbers(newClickedNumbers);
 
         if (newClickedNumbers.length === Number.length) {
-          alert('축하합니다! 모든 숫자를 순서대로 클릭했습니다!');
+          setIsCompleteOpen(true);
           setClickedNumbers([]);
           setIsRunning(false);
           
@@ -43,11 +45,13 @@ const NumberGame = () => {
           // }
 
           const payload = {
-            result: seconds, 
+            score: seconds, 
             gameType: "숫자 순서 게임"
           };
 
-          axios.patch(`${apiBaseUrl}/api/vi/game/play`, payload)
+          axios.patch(`${apiBaseUrl}/api/vi/game/play`, payload, {
+            params: { id },
+          })
             .then((response) => {
               console.log('Success:', response.data);
             })
@@ -88,7 +92,7 @@ const NumberGame = () => {
         </NumberGrid>
         <Button text={"나가기"} onClick={() => nav(-1)}/>
       </Wrapper>
-
+      {isCompleteOpen && <GameComplete />}
       {
         isOverlayOpen && (
           <Retry handleRetry={handleRetry} />
@@ -106,7 +110,9 @@ const Wrapper = styled.div`
   margin-bottom: 84px;
 
   Button {
-    margin: 45px 130px;
+    margin: 45px 75px;
+    width: 150px;
+    height: 40px;
   }
 `;
 
@@ -125,7 +131,7 @@ const NumberGrid = styled.div`
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 15px;
   margin-top: 30px;
 `;
 
@@ -133,14 +139,14 @@ const NumberItem = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 110px;
-  height: 110px;
+  width: 90px;
+  height: 90px;
   border-radius: 20px;
   background-color: ${({isClicked, theme}) => (isClicked ? theme.colors.main : "#FFFFFF")};
   color: ${({isClicked}) => (isClicked ? "#FFFFFF" : "black")};
   border: 1px solid gray;
-  font-size: 2rem;
-  font-weight: bold;
+  font-size: 2.2rem;
+  z-index: 10;
 `
 
 export default NumberGame;

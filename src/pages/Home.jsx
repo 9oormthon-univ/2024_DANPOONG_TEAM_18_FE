@@ -9,7 +9,7 @@ import getFormatTime from "../utils/getFormatTime"
 const Home = () => {
   const nav = useNavigate();
   const [activeTab, setActiveTab] = useState(0);
-  const { gamePlayed, diaryWrote, level, statistics } = useContext(ScoreContext);
+  const { gamePlayed, diaryWrote, level, statistics, id } = useContext(ScoreContext);
 
   const handleGameNav = () => {
     nav('/game');
@@ -75,7 +75,7 @@ const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 40px;
+  margin-top: 20px;
   gap: 30px;
 `
 

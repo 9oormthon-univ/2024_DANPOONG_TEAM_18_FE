@@ -7,6 +7,7 @@ import Timer from "../components/Timer";
 import Button from "../components/Button"
 import { ScoreContext } from "../App"
 import Retry from "./Retry";
+import GameComplete from "./GameComplete";
 import Card from "../assets/icons/card.svg"
 import flower1 from '../assets/images/flower-1.png'
 import flower2 from '../assets/images/flower-2.png'
@@ -19,9 +20,10 @@ const keys = [flower1, flower2, flower3, flower4, flower5, flower6];
 
 const NumberGame = () => {
     const nav = useNavigate();
-    const { seconds, setSeconds } = useContext(ScoreContext);
+    const { seconds, setSeconds, id } = useContext(ScoreContext);
     const [isRunning, setIsRunning] = useState(true);
     const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+    const [isCompleteOpen, setIsCompleteOpen] = useState(false);
     const [flippedCards, setFlippedCards] = useState([]);
     const [matchedCards, setMatchedCards] = useState([]);
     const [cards, setCards] = useState(() => 
@@ -57,22 +59,24 @@ const NumberGame = () => {
         }, 1000);
 
         if (matchedCards.length + 1 === keys.length) {
-          alert('축하합니다! 모든 카드를 맞추셨습니다!');
+          setIsCompleteOpen(true);
           setIsRunning(false);
           
           const payload = {
-            result: seconds, 
+            score: seconds, 
             gameType: "카드 뒤집기 게임"
           };
 
-          axios.patch(`${apiBaseUrl}/api/vi/game/play`, payload)
+          axios.patch(`${apiBaseUrl}/api/vi/game/play`, payload, {
+            params: { id },
+          })
             .then((response) => {
               console.log('Success:', response.data);
             })
             .catch((error) => {
                 console.error('Error:', error);
             });
-        }
+          }
       }
     }
 
@@ -112,7 +116,7 @@ const NumberGame = () => {
     </CardGrid>
     <Button text={"나가기"} onClick={() => nav(-1)}/>
       </Wrapper>
-
+      {isCompleteOpen && <GameComplete />}
       {
         isOverlayOpen && (
           <Retry handleRetry={handleRetry} />
@@ -151,19 +155,20 @@ const Title = styled.div`
 const CardGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 10px;
   justify-content: center;
   padding: 20px;
   margin-top: 5px;
 `;
 
 const CardItem = styled.div`
-  width: 90px;
-  height: 130px;
+  width: 80px;
+  height: 115px;
   position: relative;
   perspective: 1000px;
   overflow: hidden;
   border-radius: 20px;
+  z-index: 10;
 `;
 
 const CardInner = styled.div`

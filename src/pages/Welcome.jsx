@@ -1,28 +1,34 @@
 import styled from "styled-components";
 import TreeIcon1 from "../assets/icons/tree-icon-1.svg";
 import TreeIcon2 from "../assets/icons/tree-icon-2.svg"
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Modal from "../components/Modal";
 import axios from "axios";
+import { ScoreContext } from "../App";
 
 const Welcome = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [connection, setConnection] = useState(0);
+  const [connection, setConnection] = useState(1);
+  const { id } = useContext(ScoreContext);
 
   const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${apiBaseUrl}/api/vi/home`);
-        setConnection(response.data.connection);
+        const userId = id; // 헤더에 보낼 ID
+        console.log(id)
+        const response = await axios.get(`${apiBaseUrl}/api/vi/home`, {
+          params: { userId },
+        });
+        setConnection(response.data.data.connection);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
 
     fetchData();
-  }, [])
+  }, [id]);
 
   const handleClickNextModal = () => {
     setIsModalOpen(true);
