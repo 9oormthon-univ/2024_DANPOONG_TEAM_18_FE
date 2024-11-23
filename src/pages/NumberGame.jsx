@@ -92,7 +92,9 @@ const Wrapper = styled.div`
   margin-bottom: 84px;
 
   Button {
-    margin: 45px 130px;
+    margin: 45px 75px;
+    width: 150px;
+    height: 40px;
   }
 `;
 
@@ -111,7 +113,7 @@ const NumberGrid = styled.div`
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 15px;
   margin-top: 30px;
 `;
 
@@ -119,8 +121,8 @@ const NumberItem = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 110px;
-  height: 110px;
+  width: 90px;
+  height: 90px;
   border-radius: 20px;
   background-color: ${({isClicked, theme}) => (isClicked ? theme.colors.main : "#FFFFFF")};
   color: ${({isClicked}) => (isClicked ? "#FFFFFF" : "black")};
