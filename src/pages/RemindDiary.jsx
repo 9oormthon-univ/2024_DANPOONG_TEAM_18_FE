@@ -79,7 +79,7 @@ const Title = styled.div`
 
 const CardContainer = styled.div`
   display: flex;
-  height: 500px;
+  height: 400px;
   justify-content: center; /* 가로 방향 중앙 정렬 */
   align-items: center; /* 세로 방향 중앙 정렬 */
   width: 100%; /* 부모 요소 너비 */
@@ -98,8 +98,8 @@ const CardItem = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 180px;
-  height: 180px;
+  width: 140px;
+  height: 140px;
   border-radius: 20px;
   background-color: #FFFFFF;
   color: "black";
