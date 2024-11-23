@@ -23,7 +23,8 @@ const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    max-width: 480px;
+    width: 360px;
+    height: 740px;
     margin: auto;
     background: linear-gradient(${(props) => props.theme.colors.background}, #FFFFFF);
     height: 100vh;

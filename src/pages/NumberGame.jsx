@@ -125,8 +125,7 @@ const NumberItem = styled.div`
   background-color: ${({isClicked, theme}) => (isClicked ? theme.colors.main : "#FFFFFF")};
   color: ${({isClicked}) => (isClicked ? "#FFFFFF" : "black")};
   border: 1px solid gray;
-  font-size: 2rem;
-  font-weight: bold;
+  font-size: 2.2rem;
 `
 
 export default NumberGame;
