@@ -6,6 +6,7 @@ import Timer from "../components/Timer";
 import Button from "../components/Button"
 import { ScoreContext } from "../App"
 import Retry from "./Retry";
+import GameComplete from "./GameComplete";
 
 const Number = [1,2,3,4,5,6,7,8,9,10,11,12];
 
@@ -20,6 +21,7 @@ const NumberGame = () => {
     const [clickedNumbers, setClickedNumbers] = useState([]);
     const [isRunning, setIsRunning] = useState(true);
     const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+    const [isCompleteOpen, setIsCompleteOpen] = useState(false);
 
     useEffect(() => {
       setShuffledNumbers(shuffleArray([...Number]));
@@ -31,7 +33,7 @@ const NumberGame = () => {
         setClickedNumbers(newClickedNumbers);
 
         if (newClickedNumbers.length === Number.length) {
-          alert('축하합니다! 모든 숫자를 순서대로 클릭했습니다!');
+          setIsCompleteOpen(true);
           setClickedNumbers([]);
           setIsRunning(false);
           
@@ -72,7 +74,7 @@ const NumberGame = () => {
         </NumberGrid>
         <Button text={"나가기"} onClick={() => nav(-1)}/>
       </Wrapper>
-
+      {isCompleteOpen && <GameComplete />}
       {
         isOverlayOpen && (
           <Retry handleRetry={handleRetry} />

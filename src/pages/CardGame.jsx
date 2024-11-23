@@ -6,6 +6,7 @@ import Timer from "../components/Timer";
 import Button from "../components/Button"
 import { ScoreContext } from "../App"
 import Retry from "./Retry";
+import GameComplete from "./GameComplete";
 import Card from "../assets/icons/card.svg"
 import flower1 from '../assets/images/flower-1.png'
 import flower2 from '../assets/images/flower-2.png'
@@ -21,6 +22,7 @@ const NumberGame = () => {
     const { bestScore, setGameScore, seconds, setSeconds } = useContext(ScoreContext);
     const [isRunning, setIsRunning] = useState(true);
     const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+    const [isCompleteOpen, setIsCompleteOpen] = useState(false);
     const [flippedCards, setFlippedCards] = useState([]);
     const [matchedCards, setMatchedCards] = useState([]);
     const [cards, setCards] = useState(() => 
@@ -54,7 +56,7 @@ const NumberGame = () => {
         }, 1000);
 
         if (matchedCards.length + 1 === keys.length) {
-          alert('축하합니다! 모든 카드를 맞추셨습니다!');
+          setIsCompleteOpen(true);
           setIsRunning(false);
           
           if(bestScore.cardGame === '-' || bestScore.cardGame > seconds ){
@@ -100,7 +102,7 @@ const NumberGame = () => {
     </CardGrid>
     <Button text={"나가기"} onClick={() => nav(-1)}/>
       </Wrapper>
-
+      {isCompleteOpen && <GameComplete />}
       {
         isOverlayOpen && (
           <Retry handleRetry={handleRetry} />
