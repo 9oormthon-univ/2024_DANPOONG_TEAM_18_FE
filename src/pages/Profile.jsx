@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import Button from "../components/Button";
 import NavigationBar from "../components/NavigationBar";
 import { useNavigate } from "react-router-dom";
+import { ScoreContext } from "../App";
 
 const Profile = () => {
   const nav = useNavigate();
   const SERVER_URL = import.meta.env.VITE_API_BASE_URL + "/api/vi/setting"; // 서버 URL
-  const userId = 3801887242; // 사용자 ID
+  const { id } = useContext(ScoreContext);
+  const userId = id; // 사용자 ID
   const [username, setUsername] = useState(""); // 사용자 이름 상태
   const [coinBalance, setCoinBalance] = useState(0); // 코인 잔액 상태
 

@@ -1,17 +1,20 @@
 import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMicrophone, faTimes, faPause, faCheck } from "@fortawesome/free-solid-svg-icons";
+import { faMicrophone, faTimes, faPause } from "@fortawesome/free-solid-svg-icons";
 import BackArrow from "../assets/icons/back-arrow.svg";
+import { ScoreContext } from "../App";
 
 const WriteDiary = () => {
   const nav = useNavigate();
   const [isRecording, setIsRecording] = useState(false);
   const [currentInputRef, setCurrentInputRef] = useState(null);
   const recognitionRef = useRef(null);
+  const { id } = useContext(ScoreContext);
   const SERVER_URL = import.meta.env.VITE_API_BASE_URL + "/api/vi/diary/text"; // 서버 URL
-  const userId = 3804726404; // 사용자 ID
+  const userId = id; // 사용자 ID
 
   const textAreaRef1 = useRef(null); // textarea를 참조하기 위한 useRef 생성
   const textAreaRef2 = useRef(null); // textarea를 참조하기 위한 useRef 생성

@@ -1,15 +1,16 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import Button from "../components/Button";
 import Retry from "./Retry";
 import GameComplete from "./GameComplete";
+import { ScoreContext } from "../App";
 
 const RemindDiary = () => {
   const nav = useNavigate();
-
+  const { id } = useContext(ScoreContext);
   const SERVER_URL = import.meta.env.VITE_API_BASE_URL + "/api/vi/diary/quiz"; // 서버 URL
-  const userId = 3801887242; // 사용자 ID
+  const userId = id; // 사용자 ID
 
   // 상태 관리
   const [option, setOption] = useState([]); // 선택지 상태
