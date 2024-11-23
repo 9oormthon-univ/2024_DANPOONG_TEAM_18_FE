@@ -141,19 +141,20 @@ const Title = styled.div`
 const CardGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+  gap: 10px;
   justify-content: center;
   padding: 20px;
   margin-top: 5px;
 `;
 
 const CardItem = styled.div`
-  width: 90px;
-  height: 130px;
+  width: 80px;
+  height: 115px;
   position: relative;
   perspective: 1000px;
   overflow: hidden;
   border-radius: 20px;
+  z-index: 10;
 `;
 
 const CardInner = styled.div`

@@ -141,6 +141,7 @@ const WordItem = styled.div`
   font-size: 25px; /* 텍스트 크기 (옵션) */
   font-weight: bold; /* 텍스트 강조 (옵션) */
   cursor: pointer;
+  z-index: 10;
 `;
 
 export default TextGame;
