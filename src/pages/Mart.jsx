@@ -1,8 +1,12 @@
 import styled from "styled-components";
 import Button from "../components/Button";
+import { useLocation } from "react-router-dom";
 import NavigationBar from "../components/NavigationBar";
 
 const Mart = () => {
+
+  const location = useLocation(); // React Router의 location 사용
+  const coinBalance = location.state?.coinBalance || 0; // 전달받은 state에서 코인 잔액 가져오기
 
   return (
     <>
@@ -13,7 +17,7 @@ const Mart = () => {
           <Spacing />
           <TextRow>
             <Text>내가 보유 중인 코인</Text>
-            <Coin>C 5,000</Coin>
+            <Coin>C {coinBalance.toLocaleString()}</Coin>
           </TextRow>
 
           <Text2>광고를 보면 코인을 더 모을 수 있어요!</Text2>

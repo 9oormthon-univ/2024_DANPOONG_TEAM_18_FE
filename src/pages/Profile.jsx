@@ -1,15 +1,53 @@
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import Button from "../components/Button";
 import NavigationBar from "../components/NavigationBar";
 import { useNavigate } from "react-router-dom";
+import { ScoreContext } from "../App";
 
 const Profile = () => {
   const nav = useNavigate();
+  const SERVER_URL = import.meta.env.VITE_API_BASE_URL + "/api/vi/setting"; // 서버 URL
+  const { id } = useContext(ScoreContext);
+  const userId = id; // 사용자 ID
+  const [username, setUsername] = useState(""); // 사용자 이름 상태
+  const [coinBalance, setCoinBalance] = useState(0); // 코인 잔액 상태
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch(`${SERVER_URL}?id=${userId}`, {
+        method: "GET",
+      });
+
+      if (!response.ok) {
+        throw new Error("데이터를 가져오는데 실패했습니다.");
+      }
+
+      const responseData = await response.json(); // JSON 응답 데이터 파싱
+
+      if (responseData.success) {
+        // 서버 응답 데이터에서 username과 coin_balance를 상태에 저장
+        setUsername(responseData.data.username);
+        setCoinBalance(responseData.data.coin_balance);
+      } else {
+        console.error("서버 오류:", responseData.error?.message);
+        alert("데이터를 가져오는 중 문제가 발생했습니다.");
+      }
+    } catch (error) {
+      console.error("Error:", error.message);
+      alert("데이터를 가져오는 중 문제가 발생했습니다.");
+    }
+  };
+
+
+  // GET 요청으로 데이터 가져오기
+  useEffect(() => {
+
+    fetchData();
+  }, []); // 컴포넌트가 마운트될 때 한 번 실행
 
   const Mart = () => {
-
-    nav("/profile/mart");
-
+    nav("/profile/mart", { state: { coinBalance } }); // state로 코인 잔액 전달
   };
 
   return (
@@ -17,17 +55,17 @@ const Profile = () => {
       <Wrapper>
         <Title>내 정보</Title>
         <MainContent>
-          <Name>최재혁</Name>
+          {/* 서버에서 가져온 데이터 렌더링 */}
+          <Name>{username}</Name>
           <TextRow>
             <Text>내가 보유 중인 코인</Text>
-            <Coin>C 5,000</Coin>
+            <Coin>C {coinBalance.toLocaleString()}</Coin>
           </TextRow>
           <Button text={"마트 구경하기"} onClick={() => Mart()} />
           <UserTab>내 정보 수정</UserTab>
           <UserTab>글자 크기 수정</UserTab>
           <UserTab>로그아웃</UserTab>
           <UserTab>탈퇴하기</UserTab>
-
         </MainContent>
       </Wrapper>
       <Footer>
@@ -35,7 +73,7 @@ const Profile = () => {
       </Footer>
     </>
   );
-}
+};
 
 const Wrapper = styled.div`
   display: flex;
