@@ -44,9 +44,11 @@ const Wrapper = styled.div`
   width: 100%;
   margin-bottom: 84px;
 
-Button {
-    margin: 30px 130px;
-  }
+  Button {
+      margin: 10px 80px;
+      margin-bottom: 40px;
+      width: 146px;
+    }
 `;
 const Title = styled.div`
   font-weight: 600;

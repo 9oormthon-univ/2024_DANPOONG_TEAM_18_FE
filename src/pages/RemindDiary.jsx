@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Button from "../components/Button"
 import Retry from "./Retry";
+import GameComplete from "./GameComplete";
 
 const RemindDiary = () => {
   const nav = useNavigate();
@@ -10,6 +11,7 @@ const RemindDiary = () => {
   const answer = 2;
 
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+  const [isCompleteOpen, setIsCompleteOpen] = useState(false);
 
   const initializeGame = () => {
 
@@ -18,7 +20,7 @@ const RemindDiary = () => {
 
   const remindClick = (index) => {
     if (index === answer) {
-      alert("축하합니다! 제대로 기억을 되짚으셨습니다!");
+      setIsCompleteOpen(true);
 
     } else {
       setIsOverlayOpen(true);
@@ -49,6 +51,7 @@ const RemindDiary = () => {
         </MainContent>
 
       </Wrapper>
+      {isCompleteOpen && <GameComplete />}
       {isOverlayOpen && <Retry handleRetry={handleRetry} />}
     </>
   );
@@ -106,6 +109,7 @@ const CardItem = styled.div`
   border: 1px solid gray;
   font-size: 2rem;
   font-weight: bold;
+  z-index: 10;
 `;
 
 const MainContent = styled.div`

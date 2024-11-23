@@ -102,6 +102,7 @@ const Input = styled.textarea`
   outline: none;
   resize: none; /* 사용자가 크기 조정하지 못하도록 설정 */
   overflow-y: auto; /* 텍스트가 넘칠 경우 스크롤 추가 */
+  z-index: 10;
   &:focus {
     border-color: #674188; /* 선택 시 테두리 색상 */
   }

@@ -53,6 +53,12 @@ const ButtonContainer = styled.div`
   display: flex;
   gap: 50px;
   margin-top: 60px;
+
+  Button {
+    margin: 10px 130px;
+      margin-bottom: 40px;
+      width: 80px;
+  }
 `;
 
 export default GameComplete;

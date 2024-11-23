@@ -52,8 +52,14 @@ const BoldContent = styled.div`
 
 const ButtonContainer = styled.div`
   display: flex;
-  gap: 50px;
+  gap: 40px;
   margin-top: 60px;
+
+  Button {
+    margin: 10px 0;
+      margin-bottom: 40px;
+      width: 90px;
+  }
 `;
 
 export default Retry;
