@@ -59,31 +59,31 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 55px 30px;
+  padding: 80px 30px;
   width: 100%;
   margin-bottom: 84px;
 
   Button {
     margin: 60px 130px 150px;
+    width: 150px;
+    height: 40px;
   }
 `;
 
 const Title = styled.div`
   font-weight: 600;
   font-size: 26px;
-  margin-bottom: 10px;  
-
-
+  margin-bottom: 10px;
 `;
 
 
 const CardContainer = styled.div`
   display: flex;
-  height: 400px;
+  height: 300px;
   justify-content: center; /* 가로 방향 중앙 정렬 */
   align-items: center; /* 세로 방향 중앙 정렬 */
   width: 100%; /* 부모 요소 너비 */
-
+  margin-top: 50px;
 `;
 
 const CardGrid = styled.div`
