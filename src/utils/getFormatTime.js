@@ -1,6 +1,6 @@
 function getFormatTime(seconds) {
     if (isNaN(seconds) || seconds === '-' || seconds === undefined) {
-      return '-- 분 -- 초';
+      return '기록 없음';
     }
 
     const minutes = Math.floor(seconds / 60);

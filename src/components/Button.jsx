@@ -2,13 +2,20 @@ import styled from "styled-components"
 
 const Button = ({ text, onClick }) => {
   return (
-    <ButtonStyle onClick={onClick}>{text}</ButtonStyle>
+    <ButtonStyle 
+      onClick={onClick} 
+      isCompleted={text === "게임 완료" || text === "일기 완료"}
+    >
+      {text}
+      </ButtonStyle>
   )
 }
 
 const ButtonStyle = styled.button`
-    color: ${(props) => props.theme.colors.main};
-    background-color: #FFFFFF;
+    color: ${(props) =>
+    props.isCompleted ? "#FFFFFF" : `${props.theme.colors.main}`};
+    background-color: ${(props) =>
+    props.isCompleted ? `${props.theme.colors.main}` : "#FFFFFF"};
     border-radius: 20px;
     border: none;
     font-size: 16px;

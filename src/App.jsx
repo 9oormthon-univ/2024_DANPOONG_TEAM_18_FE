@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import axios from "axios";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -14,35 +15,86 @@ import TextGame from "./pages/TextGame";
 import Profile from "./pages/Profile";
 import Mart from "./pages/Mart";
 import logo from "./assets/icons/logo.svg";
+import LoginAuthorizationCode from "./pages/LoginAuthorizationCode";
 
 export const ScoreContext = createContext();
 
 function AppContent() {
-  const [level, setLevel] = useState(1);
-  const [bestScore, setBestScore] = useState({
-    numberGame: '-',
-    cardGame: '-',
-    textGame: '-',
+  // const [level, setLevel] = useState(1);
+  // const [bestScore, setBestScore] = useState({
+  //   numberGame: '-',
+  //   cardGame: '-',
+  //   textGame: '-',
+  // });
+  const [userData, setUserData] = useState({
+      walks: 0,
+      gamePlayed: false,
+      diaryWrote: false,
+      level: 1,
+      statistics: [
+        {
+          gameType: "숫자 순서 게임",
+          highScore: 0,
+        },
+        {
+          gameType: "틀린 단어 찾기 게임",
+          highScore: 0,
+        },
+        {
+          gameType: "카드 뒤집기 게임",
+          highScore: 0,
+        },
+      ]
   });
   const [seconds, setSeconds] = useState(0);
+  const [id, setId] = useState();
 
-  const setGameScore = (gameName, score) => {
-    setBestScore((prevScores) => ({
-      ...prevScores,
-      [gameName]: score,
-    }));
-  };
+  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (!id) return; 
+      try {
+        const response = await axios.get(`${apiBaseUrl}/api/vi/mission`, {
+          params: { id },
+        });
+        setUserData(response.data.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [id, apiBaseUrl]);
+
+  console.log(userData)
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get(`${apiBaseUrl}/api/vi/mission`, {
+  //         params: { id },
+  //       });
+  //       setUserData(response.data.data);
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, [id])
 
   const location = useLocation();
   const hideLogoPaths = ['/welcome', '/login'];
   const shouldShowLogo = !hideLogoPaths.includes(location.pathname);
 
   return (
-    <ScoreContext.Provider value={{ level, setLevel, bestScore, setGameScore, seconds, setSeconds }}>
+    <ScoreContext.Provider value={{ ...userData, id, setId, seconds, setSeconds }}>
       {shouldShowLogo && <img src={logo} alt="Logo" className="logo" />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/login/oauth2/code/kakao" element={<LoginAuthorizationCode />} />
         <Route path="/welcome" element={<Welcome />} />
         <Route path="/game" element={<Game />} />
         <Route path="/game/number-game" element={<NumberGame />} />

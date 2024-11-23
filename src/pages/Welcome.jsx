@@ -1,31 +1,34 @@
 import styled from "styled-components";
 import TreeIcon1 from "../assets/icons/tree-icon-1.svg";
 import TreeIcon2 from "../assets/icons/tree-icon-2.svg"
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Modal from "../components/Modal";
+import axios from "axios";
+import { ScoreContext } from "../App";
 
 const Welcome = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [day, setDay] = useState(1);
+  const [connection, setConnection] = useState(1);
+  const { id } = useContext(ScoreContext);
+
+  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
   useEffect(() => {
-    const now = new Date();
+    const fetchData = async () => {
+      try {
+        const userId = id; // 헤더에 보낼 ID
+        console.log(id)
+        const response = await axios.get(`${apiBaseUrl}/api/vi/home`, {
+          params: { userId },
+        });
+        setConnection(response.data.data.connection);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
 
-    const nextMidnight = new Date();
-    nextMidnight.setHours(24,0,0,0);
-
-    const timeUntilMidnight = nextMidnight - now;
-
-    const midnightTimeout = setTimeout(() => {
-      setDay((prevDay) => prevDay + 1);
-
-      setInterval(() => {
-        setDay((prevDay) => prevDay + 1);
-      }, 24 * 60 * 60 * 1000);
-    }, timeUntilMidnight);
-
-    return () => clearTimeout(midnightTimeout);
-  },[])
+    fetchData();
+  }, [id]);
 
   const handleClickNextModal = () => {
     setIsModalOpen(true);
@@ -39,11 +42,11 @@ const Welcome = () => {
         <Wrapper onClick={() => handleClickNextModal()}>
           <MainContent>
             <div>환영합니다 :)</div>
-            <div>{day}일째 이용중이시네요!</div>
+            <div>{connection}일째 이용중이시네요!</div>
           </MainContent>
           <div>오늘도 나무를 키워볼까요?</div>
           {
-            day < 3 ? (
+            connection < 3 ? (
               <img src={TreeIcon1} alt="tree-icon-1" width={100} height={160} />
             ) : (
               <img src={TreeIcon2} alt="tree-icon-2" width={100} height={180} />
