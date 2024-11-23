@@ -10,8 +10,8 @@ const Modal = () => {
         <Container>
             <img src={logo} alt='logo' width={70} height={70} />
             <span>기억의 나무에 어서오세요 :)</span>
-            <span className='highlight'>하루 치 미션은</span>
-            <span className='highlight'>게임 1번, 일상 기록 1번 입니다.</span>
+            <span className='highlight'>하루 치 미션은 게임 1번, </span>
+            <span className='highlight'>일상 기록 1번 입니다.</span>
             <ConfirmButton onClick={() => nav('/')}>확인했습니다</ConfirmButton>
         </Container>
     </Wrapper>

@@ -2,13 +2,14 @@ import styled from "styled-components"
 import logo from '../assets/icons/logo.svg'
 import kakaoLogo from '../assets/icons/kakao-logo.svg'
 
-const KAKAO_LOGIN_URL = import.meta.env.VITE_KAKAO_LOGIN_URL;
-
 const Login = () => {
-  const handleKakaoLogin = () => {
-    const redirectUri = `${window.location.origin}/welcome`;
-    window.location.href = `${KAKAO_LOGIN_URL}?redirect_uri=${redirectUri}`;
-  };
+    const handleKakaoLogin = async () => {
+        const KAKAO_CLIENT_ID = import.meta.env.VITE_KAKAO_CLIENT_ID;
+        const KAKAO_REDIRECT_URI = import.meta.env.VITE_KAKAO_REDIRECT_URI;
+        const KAKAO_LOGIN_URL = import.meta.env.VITE_KAKAO_LOGIN_URL;
+
+        window.location.href = `${KAKAO_LOGIN_URL}?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`;
+      };
 
   return (
     <MainWrapper>

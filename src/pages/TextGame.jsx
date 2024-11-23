@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
+import axios from "axios";
 
 import Timer from "../components/Timer";
 import Button from "../components/Button";
@@ -24,13 +25,15 @@ const wrongWord = [
 
 const TextGame = () => {
     const nav = useNavigate();
-    const { bestScore, setGameScore, seconds, setSeconds } = useContext(ScoreContext);
+    const { seconds, setSeconds, id } = useContext(ScoreContext);
 
     const [todayWordIndex, setTodayWordIndex] = useState(null);
     const [todayWrongWordPosition, setTodayWrongWordPosition] = useState(null);
     const [isRunning, setIsRunning] = useState(true);
     const [isOverlayOpen, setIsOverlayOpen] = useState(false);
     const [isCompleteOpen, setIsCompleteOpen] = useState(false);
+
+    const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
     const initializeGame = () => {
         setTodayWordIndex(Math.floor(Math.random() * correctWord.length));
@@ -46,9 +49,20 @@ const TextGame = () => {
             setIsCompleteOpen(true);
             setIsRunning(false);
 
-            if (bestScore.textGame === "-" || bestScore.textGame > seconds) {
-                setGameScore("textGame", seconds);
-            }
+            const payload = {
+                score: seconds, 
+                gameType: "틀린 단어 찾기 게임"
+              };
+    
+              axios.patch(`${apiBaseUrl}/api/vi/game/play`, payload, {
+                params: { id },
+              })
+                .then((response) => {
+                  console.log('Success:', response.data);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
         } else {
             setIsRunning(false);
             setIsOverlayOpen(true);
