@@ -1,8 +1,24 @@
 {
     "routes": [
       {
-        "src": "/(.*)",
-        "dest": "/index.html" 
+        "src": "/static/(.*)", 
+        "dest": "/static/$1"
+      },
+      {
+        "src": "/assets/(.*)",
+        "dest": "/assets/$1"
+      },
+      {
+        "src": "/(js|css|img|fonts)/(.*)",
+        "dest": "/$1/$2"
+      },
+      {
+        "src": "/favicon.ico",
+        "dest": "/favicon.ico"
+      },
+      {
+        "src": "/(.*)", 
+        "dest": "/index.html"
       }
     ]
   }
