@@ -68,7 +68,7 @@ const TextRow = styled.div`
 `;
 const CardContainer = styled.div`
   display: flex;
-  height: 120px;
+  height: 300px;
   justify-content: center; /* 가로 방향 중앙 정렬 */
   align-items: center; /* 세로 방향 중앙 정렬 */
   width: 100%; /* 부모 요소 너비 */
@@ -87,8 +87,8 @@ const CardItem = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 180px;
-  height: 180px;
+  width: 140px;
+  height: 140px;
   border-radius: 20px;
   background-color: #FFFFFF;
   color: "black";
@@ -122,6 +122,11 @@ const ButtonContainer = styled.div`
   align-items: center; /* 세로 방향 중앙 정렬 */
   width: 100%; /* 부모 요소의 전체 너비 */
 
+    Button {
+      margin: 10px 80px;
+      margin-bottom: 40px;
+      width: 146px;
+    }
 `;
 
 const MainContent = styled.div`
