@@ -13,6 +13,7 @@ const ButtonStyle = styled.button`
     border: none;
     font-size: 16px;
     font-weight: bold;
+    font-family: 'Gyeonggi_Batang_Bold';
     padding: 10px 25px;
     box-shadow: 0px 1px 3px 2px rgba(0,0,0,0.1);
     cursor: pointer;

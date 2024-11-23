@@ -11,7 +11,7 @@ const gameDetails = [
     key: "numberGame",
     path: "number-game",
     title: "숫자 순서 게임",
-    description: "1부터 16까지 순서대로 누르는 게임입니다 🤗",
+    description: "1부터 16까지 순서대로 누르는 \n 게임입니다 🤗",
   },
   {
     key: "cardGame",

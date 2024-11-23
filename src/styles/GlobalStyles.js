@@ -7,9 +7,17 @@ const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
   }
 
+  @font-face {
+    font-family: 'Gyeonggi_Batang_Bold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2410-3@1.0/Batang_Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+  }
+
   html, body {
     background-color: gray;
     color: #333;
+    font-family: 'Gyeonggi_Batang_Bold';
     min-height: 100vh;
     width: 100%;
   }
