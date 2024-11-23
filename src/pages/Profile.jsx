@@ -47,7 +47,9 @@ const Wrapper = styled.div`
   margin-bottom: 84px;
 
 Button {
-    margin: 30px 130px 150px;
+    margin: 30px 75px 150px;
+    width: 150px;
+    height: 40px;
   }
 `;
 const Title = styled.div`
