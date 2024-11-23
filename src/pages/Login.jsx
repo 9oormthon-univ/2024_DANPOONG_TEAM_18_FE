@@ -5,8 +5,8 @@ import kakaoLogo from '../assets/icons/kakao-logo.svg'
 const Login = () => {
     const handleKakaoLogin = async () => {
         const KAKAO_CLIENT_ID = import.meta.env.VITE_KAKAO_CLIENT_ID;
-        const KAKAO_REDIRECT_URI = import.meta.env.VITE_KAKAO_REDIRECT_URI;
         const KAKAO_LOGIN_URL = import.meta.env.VITE_KAKAO_LOGIN_URL;
+        const KAKAO_REDIRECT_URI = `${window.location.origin}${import.meta.env.VITE_KAKAO_REDIRECT_URI}`;
 
         window.location.href = `${KAKAO_LOGIN_URL}?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`;
       };
