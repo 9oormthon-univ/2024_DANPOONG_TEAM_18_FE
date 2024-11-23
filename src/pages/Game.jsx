@@ -102,7 +102,7 @@ const MainContent = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 50px;
+  margin: 30px;
 `;
 
 const ScoreContainer = styled.div`
@@ -112,7 +112,7 @@ const ScoreContainer = styled.div`
   width: 200px;
   height: 30px;
   border-bottom: 2px dotted black;
-  margin-bottom: 130px;
+  margin-bottom: 100px;
 `;
 
 const Score = styled.div`
