@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
 
@@ -48,6 +48,11 @@ function AppContent() {
   });
   const [seconds, setSeconds] = useState(0);
   const [id, setId] = useState();
+  const nav = useNavigate();
+
+  useEffect(() => {
+    nav('/login');
+  }, []);
 
   const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
