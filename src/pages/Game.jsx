@@ -11,19 +11,19 @@ const gameDetails = [
     key: "numberGame",
     path: "number-game",
     title: "숫자 순서 게임",
-    description: "1부터 16까지 순서대로 누르는 \n 게임입니다 🤗",
+    description: "1부터 16까지 순서대로 \n 누르는 게임입니다 🤗",
   },
   {
     key: "cardGame",
     path: "card-game",
     title: "카드 뒤집기 게임",
-    description: "카드를 뒤집어 같은 그림의 카드를 맞추는 \n 게임입니다 🃏",
+    description: "카드를 뒤집어 같은 \n 그림의 카드를 맞추는 \n 게임입니다 🃏",
   },
   {
     key: "textGame",
     path: "text-game",
     title: "틀린 단어 찾기 게임",
-    description: "여러 개의 단어 중 틀린 단어를 골라내는 \n 게임입니다 🔍",
+    description: "여러 개의 단어 중 \n 틀린 단어를 골라내는 \n 게임입니다 🔍",
   },
 ];
 
@@ -73,12 +73,12 @@ const Game = () => {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 55px 30px;
+  padding: 55px 22px;
   width: 100%;
   margin-bottom: 84px;
 
   Button {
-    margin: 0px 75px;
+    margin: 0px 80px;
     width: 150px;
     height: 40px;
   }
@@ -86,7 +86,7 @@ const Wrapper = styled.div`
 
 const Title = styled.div`
   font-weight: 600;
-  font-size: 26px;
+  font-size: 24px;
   margin-bottom: 30px;
 `;
 
@@ -137,6 +137,7 @@ const Description = styled.div`
   margin-bottom: 20px;
   text-align: center;
   white-space: pre-line;
+  line-height: 1.4;
 `;
 
 const Footer = styled.div`
