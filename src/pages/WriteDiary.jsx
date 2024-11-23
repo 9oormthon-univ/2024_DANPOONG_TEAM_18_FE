@@ -57,6 +57,7 @@ const Title = styled.div`
 
 
 const RowContainer = styled.div`
+  margin-top: 30px;
   height: 30px;
   width: 100%;
   margin-bottom: 20px;
@@ -92,7 +93,7 @@ const Text = styled.div`
 
 const Input = styled.textarea`
   padding: 10px;
-  width : 400px;
+  width : 300px;
   height : 150px;
   color: #674188;
   font-size: 16px;

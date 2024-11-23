@@ -24,7 +24,7 @@ const Profile = () => {
           </TextRow>
 
           <Button text={"마트 구경하기"} onClick={() => Mart()} />
-          <Spacing />
+
           <UserTab>내 정보 수정</UserTab>
           <UserTab>글자 크기 수정</UserTab>
           <UserTab>로그아웃</UserTab>
@@ -47,9 +47,7 @@ const Wrapper = styled.div`
   margin-bottom: 84px;
 
 Button {
-    margin: 30px 75px 150px;
-    width: 150px;
-    height: 40px;
+    margin: 30px 130px 150px;
   }
 `;
 const Title = styled.div`
