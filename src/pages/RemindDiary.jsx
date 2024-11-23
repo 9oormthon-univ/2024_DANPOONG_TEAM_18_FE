@@ -15,6 +15,7 @@ const RemindDiary = () => {
   // 상태 관리
   const [option, setOption] = useState([]); // 선택지 상태
   const [answer, setAnswer] = useState(null); // 정답 인덱스 상태
+  const [question, setQuestion] = useState(""); // 문제 상태
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
   const [isCompleteOpen, setIsCompleteOpen] = useState(false);
 
@@ -32,11 +33,12 @@ const RemindDiary = () => {
       const responseData = await response.json(); // JSON 응답 데이터 파싱
 
       if (responseData.success) {
-        const { choices, correctAnswer } = responseData.data;
+        const { choices, correctAnswer, question } = responseData.data;
 
         // 상태 업데이트
         setOption(choices); // 선택지 상태 업데이트
         setAnswer(choices.indexOf(correctAnswer)); // 정답 인덱스 상태 업데이트
+        setQuestion(question); // 문제 상태 업데이트
       } else {
         console.error("서버 오류:", responseData.error?.message);
         alert("데이터를 가져오는 중 문제가 발생했습니다.");
@@ -75,7 +77,7 @@ const RemindDiary = () => {
       <Wrapper>
         <Title>기억 되짚기</Title>
         <MainContent>
-          <Text>어제 재혁이와 어디를 갔나요?</Text>
+          <Text>{question}</Text>
           <CardContainer>
             <CardGrid>
               {option.map((item, index) => (
@@ -157,6 +159,7 @@ const MainContent = styled.div`
 const Text = styled.div`
   font-size: 20px;
   margin-bottom: 10px;
+  margin: 0 50px;
 `;
 
 export default RemindDiary;
