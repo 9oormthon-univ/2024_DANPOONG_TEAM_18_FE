@@ -40,6 +40,7 @@ const GlobalStyles = createGlobalStyle`
     width: 150px;
     height: 150px;
     opacity: 0.2;
+    z-index: 1;
   }
 `;
 

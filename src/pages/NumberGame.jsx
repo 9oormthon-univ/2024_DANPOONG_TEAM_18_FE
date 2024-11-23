@@ -128,6 +128,7 @@ const NumberItem = styled.div`
   color: ${({isClicked}) => (isClicked ? "#FFFFFF" : "black")};
   border: 1px solid gray;
   font-size: 2.2rem;
+  z-index: 10;
 `
 
 export default NumberGame;
