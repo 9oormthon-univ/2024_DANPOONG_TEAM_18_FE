@@ -22,9 +22,7 @@ const Profile = () => {
             <Text>내가 보유 중인 코인</Text>
             <Coin>C 5,000</Coin>
           </TextRow>
-
           <Button text={"마트 구경하기"} onClick={() => Mart()} />
-
           <UserTab>내 정보 수정</UserTab>
           <UserTab>글자 크기 수정</UserTab>
           <UserTab>로그아웃</UserTab>
@@ -47,7 +45,7 @@ const Wrapper = styled.div`
   margin-bottom: 84px;
 
 Button {
-    margin: 30px 130px 150px;
+    margin: 30px 130px;
   }
 `;
 const Title = styled.div`
@@ -86,9 +84,6 @@ const Coin = styled.div`
 
 `;
 
-const Spacing = styled.div`
-  margin-top: 60px;
-`;
 
 const UserTab = styled.div`
     background-color: white;

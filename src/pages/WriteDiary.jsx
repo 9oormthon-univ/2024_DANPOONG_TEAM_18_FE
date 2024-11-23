@@ -94,7 +94,7 @@ const Text = styled.div`
 const Input = styled.textarea`
   padding: 10px;
   width : 300px;
-  height : 150px;
+  height : 100px;
   color: #674188;
   font-size: 16px;
   border: 2px solid #ccc;
@@ -108,9 +108,9 @@ const Input = styled.textarea`
 `;
 const FloatingButton = styled.button`
   position: fixed;
-  top: 600px;
-  width: 120px;
-  height: 120px;
+  top: 470px;
+  width: 100px;
+  height: 100px;
   background-color: #FAF8F8; 
   color: #674188;
   font-size: 24px;
