@@ -90,7 +90,7 @@ const CardItem = styled.div`
   width: 180px;
   height: 180px;
   border-radius: 20px;
-  background-color: "#FFFFFF";
+  background-color: #FFFFFF;
   color: "black";
   border: 1px solid gray;
   font-size: 2rem;
