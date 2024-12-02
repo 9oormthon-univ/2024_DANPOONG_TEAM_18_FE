@@ -147,6 +147,7 @@ const CardItem = styled.div`
   font-size: 2rem;
   font-weight: bold;
   z-index: 10;
+  padding: 30px;
 `;
 
 const MainContent = styled.div`

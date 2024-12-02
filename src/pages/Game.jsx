@@ -6,27 +6,7 @@ import { useState, useEffect, useContext } from "react";
 import { ScoreContext } from "../App";
 import getFormatTime from "../utils/getFormatTime";
 import axios from "axios";
-
-// const gameDetails = [
-//   {
-//     key: "numberGame",
-//     path: "number-game",
-//     title: "숫자 순서 게임",
-//     description: "1부터 16까지 순서대로 \n 누르는 게임입니다 🤗",
-//   },
-//   {
-//     key: "cardGame",
-//     path: "card-game",
-//     title: "카드 뒤집기 게임",
-//     description: "카드를 뒤집어 같은 \n 그림의 카드를 맞추는 \n 게임입니다 🃏",
-//   },
-//   {
-//     key: "textGame",
-//     path: "text-game",
-//     title: "틀린 단어 찾기 게임",
-//     description: "여러 개의 단어 중 \n 틀린 단어를 골라내는 \n 게임입니다 🔍",
-//   },
-// ];
+import { ContentsWrapper, Footer } from "../styles/CommonStyles";
 
 const Game = () => {
   const nav = useNavigate();
@@ -72,7 +52,7 @@ const Game = () => {
   };
 
   return (
-    <>
+    <ContentsWrapper>
       <Wrapper>
         <Title>오늘의 게임</Title>
         <MainContent>
@@ -103,20 +83,16 @@ const Game = () => {
         </MainContent>
         <Button text={"게임 플레이!"} onClick={() => handleGameOpen()} />
       </Wrapper>
+
       <Footer>
         <NavigationBar />
       </Footer>
-    </>
+
+    </ContentsWrapper>
   );
 };
 
 const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 55px 22px;
-  width: 100%;
-  margin-bottom: 84px;
-
   Button {
     margin: 0px 80px;
     width: 150px;
@@ -178,16 +154,6 @@ const Description = styled.div`
   text-align: center;
   white-space: pre-line;
   line-height: 1.4;
-`;
-
-const Footer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  width: 100%;
-  bottom: 0;
-  left: 0;
 `;
 
 export default Game;

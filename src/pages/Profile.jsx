@@ -1,9 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import Button from "../components/Button";
 import NavigationBar from "../components/NavigationBar";
 import { useNavigate } from "react-router-dom";
 import { ScoreContext } from "../App";
+import { ContentsWrapper, Footer } from "../styles/CommonStyles";
 
 const Profile = () => {
   const nav = useNavigate();
@@ -51,7 +52,7 @@ const Profile = () => {
   };
 
   return (
-    <>
+    <ContentsWrapper>
       <Wrapper>
         <Title>내 정보</Title>
         <MainContent>
@@ -71,17 +72,11 @@ const Profile = () => {
       <Footer>
         <NavigationBar />
       </Footer>
-    </>
+    </ContentsWrapper>
   );
 };
 
 const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 55px 30px;
-  width: 100%;
-  margin-bottom: 84px;
-
   Button {
       margin: 10px 80px;
       margin-bottom: 40px;
@@ -140,15 +135,6 @@ const MainContent = styled.div`
   justify-content: center;
   align-items: left;
 
-`;
-const Footer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  width: 100%;
-  bottom: 0;
-  left: 0;
 `;
 
 export default Profile;

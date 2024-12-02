@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Button from "../components/Button";
 import NavigationBar from "../components/NavigationBar";
 import { useNavigate } from "react-router-dom";
+import { ContentsWrapper, Footer } from "../styles/CommonStyles";
 
 const Diary = () => {
 
@@ -23,7 +24,7 @@ const Diary = () => {
 
     return (
 
-        <>
+        <ContentsWrapper>
             <Wrapper>
                 <Title>오늘의 일기</Title>
                 <MainContent>
@@ -36,17 +37,11 @@ const Diary = () => {
             <Footer>
                 <NavigationBar />
             </Footer>
-        </>
+        </ContentsWrapper>
     );
 };
 
 const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 55px 30px;
-  width: 100%;
-  margin-bottom: 84px;
-
 Button {
     margin: 60px 75px 150px;
     width: 150px;
@@ -74,15 +69,5 @@ const Text = styled.div`
   font-size: 20px;
 
 `;
-const Footer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  width: 100%;
-  bottom: 0;
-  left: 0;
-`;
-
 
 export default Diary;
