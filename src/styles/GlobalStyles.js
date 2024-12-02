@@ -23,13 +23,18 @@ const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    width: 360px;
-    height: 740px;
+    width: 90vw;
+    max-width: 360px;
+    height: 90vh;
+    max-height: 740px;
     margin: auto;
     background: linear-gradient(${(props) => props.theme.colors.background}, #FFFFFF);
-    height: 100vh;
     overflow: hidden;
     position: relative;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .logo {
@@ -37,8 +42,10 @@ const GlobalStyles = createGlobalStyle`
     top: 48%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 150px;
-    height: 150px;
+    width: 20vw;
+    max-width: 150px;
+    height: 20vh;
+    max-height: 150px;
     opacity: 0.2;
     z-index: 1;
   }
