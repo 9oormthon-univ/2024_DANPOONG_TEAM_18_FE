@@ -39,10 +39,6 @@ const NumberGame = () => {
           setIsCompleteOpen(true);
           setClickedNumbers([]);
           setIsRunning(false);
-          
-          // if(bestScore.numberGame === '-' || bestScore.numberGame > seconds ){
-          //   setGameScore("numberGame", seconds);
-          // }
 
           const payload = {
             score: seconds, 
@@ -107,7 +103,6 @@ const Wrapper = styled.div`
   flex-direction: column;
   padding: 0px 30px;
   width: 100%;
-  margin-bottom: 84px;
 
   Button {
     margin: 45px 75px;
