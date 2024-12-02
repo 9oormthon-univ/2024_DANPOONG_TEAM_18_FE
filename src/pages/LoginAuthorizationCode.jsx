@@ -17,6 +17,8 @@ const LoginAuthorizationCode =  () => {
         try {
           const response = await axios.get(`${BACKEND_BASE_URL}/api/auth/login/code/kakao?code=${code}`);
           console.log(response.data)
+
+          localStorage.setItem('token', response.data.data.token);
           setId(response.data.data.id);
           navigate("/welcome");
         } catch (error) {

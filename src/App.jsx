@@ -20,12 +20,6 @@ import LoginAuthorizationCode from "./pages/LoginAuthorizationCode";
 export const ScoreContext = createContext();
 
 function AppContent() {
-  // const [level, setLevel] = useState(1);
-  // const [bestScore, setBestScore] = useState({
-  //   numberGame: '-',
-  //   cardGame: '-',
-  //   textGame: '-',
-  // });
   const [userData, setUserData] = useState({
       walks: 0,
       gamePlayed: false,
@@ -51,8 +45,27 @@ function AppContent() {
   const nav = useNavigate();
 
   useEffect(() => {
-    nav('/login');
-  }, []);
+    const token = localStorage.getItem("token");
+  
+    if (token) {
+      try {
+        const { exp } = jwtDecode(token); // 만료 시간 추출
+        const currentTime = Math.floor(Date.now() / 1000); // 현재 시간 (초 단위)
+        if (exp > currentTime) {
+          nav("/"); // 유효한 토큰인 경우
+        } else {
+          localStorage.removeItem("token"); // 만료된 토큰 삭제
+          nav("/login");
+        }
+      } catch (error) {
+        console.error("Invalid token:", error);
+        localStorage.removeItem("token"); // 유효하지 않은 토큰 삭제
+        nav("/login");
+      }
+    } else {
+      nav("/login"); // 토큰이 없는 경우 로그인 페이지로 이동
+    }
+  }, [nav]);
 
   const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
@@ -72,22 +85,6 @@ function AppContent() {
     fetchData();
   }, [id, apiBaseUrl]);
 
-  console.log(userData)
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await axios.get(`${apiBaseUrl}/api/vi/mission`, {
-  //         params: { id },
-  //       });
-  //       setUserData(response.data.data);
-  //     } catch (error) {
-  //       console.error("Error fetching data:", error);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, [id])
 
   const location = useLocation();
   const hideLogoPaths = ['/welcome', '/login'];
